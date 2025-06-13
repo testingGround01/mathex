@@ -272,6 +272,26 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// Parse a comma-separated list of numbers or ranges (e.g., "2,4-6")
+function parseNumberList(str) {
+    if (!str || typeof str !== 'string') return [];
+    const values = [];
+    str.split(',').forEach(part => {
+        const item = part.trim();
+        if (!item) return;
+        if (item.includes('-')) {
+            const [start, end] = item.split('-').map(n => parseInt(n, 10));
+            if (!isNaN(start) && !isNaN(end) && start <= end) {
+                for (let i = start; i <= end; i++) values.push(i);
+            }
+        } else {
+            const num = parseInt(item, 10);
+            if (!isNaN(num)) values.push(num);
+        }
+    });
+    return values.filter(n => n >= 1);
+}
+
 function formatDecimalAnswer(num) {
     if (typeof num !== 'number' || isNaN(num)) {
         return '0.000';
@@ -511,14 +531,15 @@ function generateQuestion() {
 
   // === Targeted Practice Logic ===
   if (currentSessionSettings.mode === 'section5') {
-      const { targetType, targetValue1, targetValueMin, targetValueMax } = currentSessionSettings;
+      const { targetType, targetValues, targetValueMin, targetValueMax } = currentSessionSettings;
       const MULT_RANGE = 12;
       let newQuestion = null;
       try {
          if (targetType === 'multiplicationTable') {
+            const table = targetValues[getRandomInt(0, targetValues.length - 1)];
             const num2 = getRandomInt(1, MULT_RANGE);
-            const text = Math.random() > 0.5 ? `${targetValue1} × ${num2}?` : `${num2} × ${targetValue1}?`;
-            newQuestion = { text: text, answer: (targetValue1 * num2).toString(), type: 'multiplication', difficulty: 'targeted' };
+            const text = Math.random() > 0.5 ? `${table} × ${num2}?` : `${num2} × ${table}?`;
+            newQuestion = { text: text, answer: (table * num2).toString(), type: 'multiplication', difficulty: 'targeted' };
          } else if (targetType === 'squareRange') {
             const base = getRandomInt(targetValueMin, targetValueMax);
             newQuestion = { text: `${base}²?`, answer: (base * base).toString(), type: 'squares', difficulty: 'targeted' };
@@ -934,7 +955,7 @@ function toggleSub(type) {
         difficulty: [],
         adaptiveSubMode: 'questions',
         targetType: null,
-        targetValue1: null,
+        targetValues: [],
         targetValueMin: null,
         targetValueMax: null,
         limitType: 'questions',
@@ -1000,11 +1021,11 @@ function toggleSub(type) {
          settings.targetType = activeSection.querySelector('input[name="s5-target-type"]:checked')?.value;
          if (!settings.targetType) { alert("Please select a Target Type."); activeSection.querySelector('input[name="s5-target-type"]')?.focus(); return null; }
          try {
-             if (settings.targetType === 'multiplicationTable') {
-                 const input = document.getElementById('s5-targetValue1');
-                 settings.targetValue1 = parseInt(input?.value, 10);
-                 if (!input || isNaN(settings.targetValue1) || settings.targetValue1 < 1) { alert("Please enter a valid Multiplication Table number (minimum 1)."); input?.focus(); return null; }
-             } else if (settings.targetType === 'squareRange' || settings.targetType === 'cubeRange') {
+            if (settings.targetType === 'multiplicationTable') {
+                const input = document.getElementById('s5-targetValue1');
+                settings.targetValues = parseNumberList(input?.value);
+                if (!input || settings.targetValues.length === 0) { alert("Please enter valid table numbers or range."); input?.focus(); return null; }
+            } else if (settings.targetType === 'squareRange' || settings.targetType === 'cubeRange') {
                  const inputMin = document.getElementById(settings.targetType === 'squareRange' ? 's5-targetValueMinSq' : 's5-targetValueMinCb');
                  const inputMax = document.getElementById(settings.targetType === 'squareRange' ? 's5-targetValueMaxSq' : 's5-targetValueMaxCb');
                  settings.targetValueMin = parseInt(inputMin?.value, 10);
@@ -1134,7 +1155,7 @@ function updateStatusIndicator() {
     if(currentSessionSettings && currentSessionSettings.mode === 'section5') {
         let targetDesc = '';
         switch(currentSessionSettings.targetType) {
-            case 'multiplicationTable': targetDesc = `${currentSessionSettings.targetValue1}× Table`; break;
+            case 'multiplicationTable': targetDesc = `${currentSessionSettings.targetValues.join(',')}× Table`; break;
             case 'squareRange': targetDesc = `Squares ${currentSessionSettings.targetValueMin}-${currentSessionSettings.targetValueMax}`; break;
             case 'cubeRange': targetDesc = `Cubes ${currentSessionSettings.targetValueMin}-${currentSessionSettings.targetValueMax}`; break;
         }
@@ -2488,9 +2509,31 @@ function renderPerformanceTrendChart(sessionHistory) {
     });
 }
 
+function getAchievements(profile) {
+    const achievements = [];
+    const { globalStats, detailedPerformance } = profile;
+
+    if (globalStats.totalQuestionsAnswered >= 100) achievements.push('Rookie');
+    if (globalStats.totalQuestionsAnswered >= 500) achievements.push('Veteran');
+    if (globalStats.allTimeBestStreak >= 10) achievements.push('Streak 10');
+    if (globalStats.allTimeBestStreak >= 25) achievements.push('On Fire');
+
+    for (const type in detailedPerformance) {
+        for (const diff in detailedPerformance[type]) {
+            const item = detailedPerformance[type][diff];
+            if (item.mastery >= 0.9) {
+                achievements.push(`Mastered ${diff} ${type}`);
+                return achievements;
+            }
+        }
+    }
+    return achievements;
+}
+
 function renderDashboardInsights(profile) {
     const container = document.getElementById('insights-container');
-    if (!container) return;
+    const achContainer = document.getElementById('achievements-container');
+    if (!container || !achContainer) return;
 
     const insights = [];
     const { detailedPerformance, globalStats } = profile;
@@ -2522,17 +2565,15 @@ function renderDashboardInsights(profile) {
         }
     }
 
-    // Achievement: Streak
-    if (globalStats.allTimeBestStreak >= 25) {
-        insights.push("<strong>Achievement Unlocked:</strong> 🔥 On Fire! You've achieved a streak of 25 or more correct answers.");
-    }
-
     // Render insights
     if (insights.length > 0) {
         container.innerHTML = insights.map(insight => `<div class="result-subcard" style="flex-basis: 100%; text-align: left; align-items: flex-start;"><p>${insight}</p></div>`).join('');
     } else {
         container.innerHTML = `<p style="text-align: left; color: var(--text-secondary); width: 100%;">Personalized tips and achievements will appear here as you practice.</p>`;
     }
+
+    const achievements = getAchievements(profile);
+    achContainer.innerHTML = achievements.map(a => `<span class="badge" title="Achievement">${a}</span>`).join('');
 }
 
 

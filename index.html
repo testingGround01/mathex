@@ -122,8 +122,11 @@
           <div id="dashboard-insights">
               <div class="subheading">Insights & Achievements</div>
               <div id="insights-container" class="subcards" style="justify-content: flex-start;">
-                   <!-- Insights and achievement badges will be populated by JS -->
-                   <p style="text-align: left; color: var(--text-secondary); width: 100%;">Personalized tips and achievements will appear here as you practice.</p>
+                   <!-- Insights will be populated by JS -->
+                   <p style="text-align: left; color: var(--text-secondary); width: 100%;">Personalized tips will appear here as you practice.</p>
+              </div>
+              <div id="achievements-container" class="subcards" style="justify-content: flex-start;">
+                   <!-- Achievement badges will be populated by JS -->
               </div>
           </div>
 
@@ -259,8 +262,8 @@
             </div>
             <div class="targeted-inputs">
                 <div id="s5-input-multiplicationTable">
-                     <label for="s5-targetValue1" class="visually-hidden">Multiplication Table Number</label>
-                     <input id="s5-targetValue1" class="input-bar" type="number" placeholder="Table to practice (e.g., 7)" min="1" value="7">
+                     <label for="s5-targetValue1" class="visually-hidden">Multiplication Tables</label>
+                     <input id="s5-targetValue1" class="input-bar" type="text" placeholder="Tables or range (e.g., 3,5,7 or 2-5)" value="7">
                 </div>
                 <div id="s5-input-squareRange" style="display: none;">
                     <div class="input-pair">
