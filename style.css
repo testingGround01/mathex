@@ -1,0 +1,2041 @@
+/* ============ ANIMATION KEYFRAMES ============ */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInArea {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* ============ GLOBAL BASE STYLES & RESET ============ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; /* Base font size */
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* ============ GLOBAL THEME (Practice Area Focused) ============ */
+:root {
+  --bg: #e0e0e0;
+  --card-bg: #e0e0e0; /* Sticking with solid for clean neumorphism */
+  --shadow-dark: #bebebe;
+  --shadow-light: #ffffff;
+  --text-primary: #333;
+  --text-secondary: #555;
+  /* Pill Colors (also used for bars & pie chart) */
+  --pill-correct-text: #155724;
+  --pill-correct-bg: rgba(40, 167, 69, 0.3);
+  --pill-incorrect-text: #721c24;
+  --pill-incorrect-bg: rgba(220, 53, 69, 0.3);
+  --pill-skipped-text: #856404;
+  --pill-skipped-bg: rgba(255, 193, 7, 0.3);
+  --pill-fast-text: #155724;
+  --pill-fast-bg: rgba(40, 167, 69, 0.3); /* Same as correct */
+  --pill-slow-text: #721c24;
+  --pill-slow-bg: rgba(220, 53, 69, 0.3); /* Same as incorrect */
+  --pill-average-text: #0c5460;
+  --pill-average-bg: rgba(23, 162, 184, 0.3);
+  --progress-bar-gradient: linear-gradient(90deg, #00bc8c, #2ecc71);
+  --nav-active-text: #007bff; /* Color for active nav item */
+  --nav-active-bg: rgba(0, 123, 255, 0.1); /* Subtle background for active nav */
+  --mastery-color: #007bff;
+
+  --header-height: 80px; /* Define header height variable */
+}
+
+body {
+  /* Using Segoe UI as primary, Poppins as fallback or specific override */
+  font-family: 'Segoe UI', 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding-top: var(--header-height); /* Use variable */
+  padding-bottom: 80px; /* Space at bottom */
+  background: var(--bg);
+  color: var(--text-primary); /* Set default body text color */
+  transition: background 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
+  line-height: 1.6; /* Base line-height from study styles */
+}
+
+.dark-mode {
+  --bg: #1e1e1e;
+  --card-bg: #2a2a2a; /* Sticking with solid dark */
+  --shadow-dark: #141414;
+  --shadow-light: #3a3a3a;
+  --text-primary: #eee;
+  --text-secondary: #aaa;
+  --pill-correct-text: #a3e9a4;
+  --pill-correct-bg: rgba(40, 167, 69, 0.4);
+  --pill-incorrect-text: #f5c6cb;
+  --pill-incorrect-bg: rgba(220, 53, 69, 0.4);
+  --pill-skipped-text: #ffeeba;
+  --pill-skipped-bg: rgba(255, 193, 7, 0.4);
+  --pill-fast-text: #a3e9a4;
+  --pill-fast-bg: rgba(40, 167, 69, 0.4);
+  --pill-slow-text: #f5c6cb;
+  --pill-slow-bg: rgba(220, 53, 69, 0.4);
+  --pill-average-text: #bee5eb;
+  --pill-average-bg: rgba(23, 162, 184, 0.4);
+  --progress-bar-gradient: linear-gradient(90deg, #0ca678, #20c997);
+  --nav-active-text: #4dabf7; /* Lighter blue for dark mode */
+  --nav-active-bg: rgba(77, 171, 247, 0.15);
+  --mastery-color: #4dabf7;
+}
+
+/* ============ TOP TAB (Fixed) ============ */
+.page-tab {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center title by default */
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: var(--header-height); /* Use variable */
+  padding: 0 24px; /* Adjusted padding */
+  box-sizing: border-box;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for light */
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  animation: slideInDown 0.6s ease-out forwards; /* ANIMATION */
+}
+.dark-mode .page-tab {
+    box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+}
+
+/* --- Hamburger Button --- */
+.hamburger-btn {
+    position: absolute; /* Position relative to the header */
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    font-size: 20px;
+    border: none;
+    border-radius: 50%;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    flex-direction: column; /* Stack bars vertically */
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    z-index: 1001; /* Above menu overlay but below header content if needed */
+    gap: 4px; /* Space between bars */
+    animation: scaleIn 0.5s ease-out 0.4s backwards; /* ANIMATION */
+}
+.hamburger-btn span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+}
+.hamburger-btn:hover {
+  box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
+  transform: translateY(-50%) scale(1.05);
+}
+.hamburger-btn:active {
+  box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+  transform: translateY(-50%) scale(0.98);
+}
+ .hamburger-btn:focus-visible {
+     outline: 2px solid var(--text-primary);
+     outline-offset: 2px;
+     box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light); /* Keep hover shadow */
+ }
+/* Hamburger Active State (X) */
+.hamburger-btn.active {
+   box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light); /* ADDED: Inset shadow when active */
+}
+.hamburger-btn.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg); /* Move down and rotate */
+}
+.hamburger-btn.active span:nth-child(2) {
+    opacity: 0; /* Middle bar fades out */
+}
+.hamburger-btn.active span:nth-child(3) {
+     transform: translateY(-6px) rotate(-45deg); /* Move up and rotate */
+}
+/* --- End Hamburger Button --- */
+
+.page-title { /* Adjusted for hamburger */
+    flex-grow: 1;
+    font-size: 24px; /* Slightly reduced */
+    text-align: center;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin: 0 60px; /* Increase margin to avoid overlap with side buttons */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    animation: scaleIn 0.5s ease-out 0.2s backwards; /* ANIMATION */
+}
+
+/* Theme Toggle Button */
+.toggle-btn {
+  position: absolute; /* Keep absolute for easy positioning */
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  font-size: 20px;
+  border: none;
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  z-index: 1;
+  animation: scaleIn 0.5s ease-out 0.4s backwards; /* ANIMATION */
+}
+.toggle-btn:hover {
+  box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
+  transform: translateY(-50%) scale(1.05); /* Adjust transform */
+}
+.toggle-btn:active {
+  box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+  transform: translateY(-50%) scale(0.98); /* Adjust transform */
+}
+ .toggle-btn:focus-visible {
+     outline: 2px solid var(--text-primary);
+     outline-offset: 2px;
+     box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light); /* Keep hover shadow */
+ }
+
+/* ============ NAVIGATION MENU ============ */
+#main-nav {
+    position: fixed;
+    top: var(--header-height); /* Position below header */
+    left: 0;
+    width: 100%;
+    background: var(--card-bg);
+    z-index: 999; /* Below header (1000) */
+    overflow: hidden;
+    max-height: 0; /* Initially hidden */
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.4s ease-out, opacity 0.3s ease, visibility 0s linear 0.4s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--shadow-dark); /* Separator */
+}
+ .dark-mode #main-nav {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-top-color: var(--shadow-light);
+ }
+#main-nav.active {
+    max-height: 50vh; /* Allow menu to grow */
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease 0.1s, visibility 0s linear 0s;
+}
+.nav-list {
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+}
+.nav-list li {
+    text-align: center;
+}
+.nav-list a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+.nav-list a:hover,
+.nav-list a:focus {
+    color: var(--text-primary);
+    background-color: rgba(128, 128, 128, 0.1); /* Subtle hover */
+    outline: none;
+}
+.dark-mode .nav-list a:hover,
+.dark-mode .nav-list a:focus {
+    background-color: rgba(200, 200, 200, 0.1);
+}
+/* Style for the active navigation link */
+.nav-list a.nav-active {
+    font-weight: 700; /* Make it bolder */
+    color: var(--nav-active-text); /* Use theme variable for active color */
+    background-color: var(--nav-active-bg); /* Subtle background */
+}
+
+/* ============ TOP LEVEL AREAS (Practice / Study / Dashboard / Review) ============ */
+#practice-area, #study-area, #dashboard-area, #review-area {
+    width: 100%; /* Take full width */
+    max-width: 1600px; /* Limit max width */
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content to top */
+    padding: 0 10px; /* Add some horizontal padding */
+    box-sizing: border-box;
+    animation: fadeInArea 0.5s ease forwards; /* Apply fade-in */
+}
+#practice-area.active, #study-area.active, #dashboard-area.active, #review-area.active {
+    display: flex; /* Show the active area using flex */
+}
+
+/* ============ NEUMORPHIC CARDS (Practice Area) ============ */
+.neumorphic-card,
+.secondary-card {
+  width: 95%;
+  max-width: 650px;
+  padding: 30px 35px;
+  margin: 20px 0; /* Margin applied to cards within areas */
+  border-radius: 25px;
+  background: var(--bg); /* Main cards have bg background */
+  /* Slightly tighter shadow */
+  box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.secondary-card {
+  background: var(--card-bg); /* Session/Result card have card background */
+}
+.neumorphic-card h2,
+.secondary-card h2,
+.dashboard-card h2 { /* Add dashboard h2 */
+  margin: 0 0 25px;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-primary);
+  animation: slideInUp 0.5s ease-out 0.2s backwards; /* ANIMATION */
+}
+
+/* Adjustments for cards inside areas */
+#practice-area .neumorphic-card,
+#practice-area .secondary-card,
+#dashboard-area .dashboard-card,
+#review-area .neumorphic-card, /* NEW */
+#review-area .secondary-card { /* NEW */
+    margin-left: auto; /* Center cards within the flex container */
+    margin-right: auto;
+}
+
+/* ============ INPUTS (Practice Area) ============ */
+.input-bar {
+  margin: 25px auto;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 15px;
+  background: var(--card-bg);
+  /* Standard inset */
+  box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+  color: var(--text-primary);
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+.input-bar::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+.input-bar:focus {
+    /* Subtle focus highlight */
+     box-shadow: inset 6px 6px 12px var(--shadow-dark),
+                 inset -6px -6px 12px var(--shadow-light),
+                 0 0 0 2px var(--text-secondary);
+}
+/* Hide number input spinners */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+/* Allow decimal input for answer */
+#sessionAnswer {
+  /* No specific change needed for decimals, type=number allows them */
+}
+
+/* ============ CHECKBOX & RADIO GROUP (Practice Area) ============ */
+.checkbox-group {
+  margin: 25px 0;
+  text-align: center;
+}
+.checkbox-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+.checkbox-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px 20px;
+  flex-wrap: wrap;
+}
+.checkbox-options label {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 5px 0; /* Easier vertical clicking */
+  user-select: none; /* Prevent text selection on click */
+}
+.checkbox-options input[type="checkbox"],
+.checkbox-options input[type="radio"] {
+  appearance: none; /* Remove default appearance */
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  background: var(--card-bg);
+  /* Standard raised shadow */
+  box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+  position: relative; /* For pseudo-element positioning */
+  transition: all 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0; /* Prevent shrinking in flex */
+}
+.checkbox-options input[type="checkbox"] {
+  border-radius: 8px;
+}
+.checkbox-options input[type="radio"] {
+  border-radius: 50%;
+}
+ /* Custom focus style */
+.checkbox-options input[type="checkbox"]:focus-visible,
+.checkbox-options input[type="radio"]:focus-visible {
+   outline: 2px solid var(--text-primary);
+   outline-offset: 2px;
+}
+/* Checked state (DEEPER inset shadow) */
+.checkbox-options input[type="checkbox"]:checked,
+.checkbox-options input[type="radio"]:checked {
+  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); /* Enhanced inset */
+}
+/* Checkmark for Checkbox */
+.checkbox-options input[type="checkbox"]:checked::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-primary);
+  animation: scaleIn 0.3s ease; /* ANIMATION */
+}
+/* Dot for Radio */
+.checkbox-options input[type="radio"]:checked::after {
+   content: '';
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 10px; /* Size of the inner dot */
+   height: 10px;
+   border-radius: 50%;
+   background: var(--text-primary);
+   animation: scaleIn 0.3s ease; /* ANIMATION */
+}
+/* Highlight label text when checked */
+.checkbox-options input[type="checkbox"]:checked + span,
+.checkbox-options input[type="radio"]:checked + span {
+  font-weight: 600;
+}
+
+/* ============ SECTION BUTTONS & ACTION BUTTONS (Practice Area) ============ */
+.section-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  gap: 15px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  animation: slideInUp 0.5s ease-out 0.3s backwards; /* ANIMATION */
+}
+/* Styling common to section tabs, sub-tabs, start, and session/result buttons */
+.section-buttons button, .subsection-toggle button, .start-btn, .session-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none; /* Remove default outline */
+}
+/* Hover effect - slightly raised */
+.section-buttons button:hover, .subsection-toggle button:hover, .start-btn:hover, .session-actions button:hover {
+  box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
+  transform: translateY(-1px);
+}
+/* Active tab state (DEEPER inset shadow) */
+.section-buttons button.active, .subsection-toggle button.active {
+  box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light); /* Enhanced inset */
+  font-weight: 600; /* Indicate active */
+  transform: translateY(0); /* Reset hover transform */
+}
+ /* Start and Session buttons are bolder */
+ .start-btn, .session-actions button {
+    font-weight: 600;
+ }
+/* Active (pressed) state for Start/Session/Result buttons (DEEPER inset) */
+.start-btn:active, .session-actions button:active {
+  box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light); /* Enhanced inset */
+  transform: scale(0.98); /* Slight shrink */
+}
+ /* Custom focus style for all these buttons */
+ .section-buttons button:focus-visible,
+ .subsection-toggle button:focus-visible,
+ .start-btn:focus-visible,
+ .session-actions button:focus-visible {
+     outline: 2px solid var(--text-primary);
+     outline-offset: 2px;
+     /* Keep hover shadow on focus for visibility */
+     box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
+ }
+
+/* Section display logic (Practice Area) */
+.section {
+  display: none; /* Hidden by default */
+  margin-top: 30px;
+  animation: fadeIn 0.5s ease; /* Fade-in animation */
+  width: 100%; /* Ensure sections take width */
+}
+.section.active {
+  display: block; /* Show active section */
+}
+
+/* Adaptive Mode Sub-section Toggle (Practice Area) */
+.subsection-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+.subsection-toggle button {
+  padding: 8px 16px; /* Slightly smaller */
+  font-size: 14px;
+}
+
+/* Start Button Specifics (Practice Area) */
+.start-btn {
+  margin-top: 35px;
+  padding: 12px 25px;
+  font-size: 17px;
+  font-weight: 600;
+  animation: subtlePulse 2.5s infinite ease-in-out 1s; /* ANIMATION */
+}
+.start-btn:hover, .start-btn:focus, .start-btn:active {
+    animation-name: none; /* Pause pulse on interaction */
+}
+
+/* Secondary Cards (Session, Results - Practice Area) */
+.secondary-card {
+  display: none; /* Hidden by default */
+  animation: fadeIn 0.5s ease; /* Apply fade-in */
+}
+.secondary-card.active {
+  display: block; /* Show when active */
+}
+
+/* Progress Bar (Practice Area) */
+.progress-container {
+  width: 90%;
+  max-width: 500px;
+  height: 10px;
+  background: var(--card-bg);
+  margin: 25px auto;
+  border-radius: 10px;
+  /* Inset shadow for the container */
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  overflow: hidden; /* Clip the inner bar */
+  position: relative; /* For potential future elements */
+}
+.progress-bar {
+  height: 100%;
+  background: var(--progress-bar-gradient);
+  border-radius: 10px; /* Match container */
+  width: 0%; /* Initial width */
+  transition: width 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy transition */
+}
+/* Status Text (e.g., Question 1/10 - Practice Area) */
+.status-indicator {
+  margin-top: 10px;
+  margin-bottom: 10px; /* Added margin */
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+  min-height: 20px; /* Prevent layout shift */
+}
+/* Question Display Area (Practice Area) */
+.session-question {
+  margin: 20px 10px; /* Reduced margin */
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 500;
+  min-height: 30px; /* Prevent layout shift */
+  line-height: 1.4;
+}
+/* Staggered entry for session card items */
+#sessionCard.active .status-indicator {
+    animation: fadeIn 0.4s ease 0s backwards;
+}
+#sessionCard.active .session-question {
+    animation: fadeIn 0.4s ease 0.1s backwards;
+}
+#sessionCard.active .input-bar {
+    animation: fadeIn 0.4s ease 0.2s backwards;
+}
+#sessionCard.active .session-actions {
+    animation: fadeIn 0.4s ease 0.3s backwards;
+}
+
+/* Session Action Buttons (Submit, Skip, Play Again - Practice Area) */
+.session-actions {
+  margin-top: 25px; /* Default margin, override if needed */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Allow wrapping if needed */
+}
+.session-actions button {
+    min-width: 100px; /* Ensure buttons have decent width */
+}
+
+/* ============ RESULT CARD LAYOUT (Practice & Review Areas) ============ */
+/* Result Card Subheadings */
+.subheading {
+  margin: 30px 0 15px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center; /* Center headings */
+}
+/* Container for small result boxes (Accuracy, Correct, etc.) */
+.subcards {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping */
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+/* Individual small result box */
+.result-subcard {
+  flex: 1 1 120px; /* Grow, shrink, base width */
+  min-width: 110px; /* Minimum width before wrapping */
+  padding: 20px 15px;
+  border-radius: 15px;
+  background: var(--card-bg);
+  box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
+  color: var(--text-primary);
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex; /* Center content vertically */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* Stagger animation for the small result cards */
+#resultCard.active .result-subcard,
+#reviewDetailCard.active .result-subcard { /* ADDED review card */
+    animation: scaleIn 0.4s ease-out backwards;
+}
+#resultCard.active .subcards .result-subcard:nth-child(1),
+#reviewDetailCard.active .subcards .result-subcard:nth-child(1) { animation-delay: 0.1s; }
+#resultCard.active .subcards .result-subcard:nth-child(2),
+#reviewDetailCard.active .subcards .result-subcard:nth-child(2) { animation-delay: 0.15s; }
+#resultCard.active .subcards .result-subcard:nth-child(3),
+#reviewDetailCard.active .subcards .result-subcard:nth-child(3) { animation-delay: 0.2s; }
+#resultCard.active .subcards .result-subcard:nth-child(4),
+#reviewDetailCard.active .subcards .result-subcard:nth-child(4) { animation-delay: 0.25s; }
+#resultCard.active .subcards .result-subcard:nth-child(5),
+#reviewDetailCard.active .subcards .result-subcard:nth-child(5) { animation-delay: 0.3s; }
+#resultCard.active .subcards .result-subcard:nth-child(6),
+#reviewDetailCard.active .subcards .result-subcard:nth-child(6) { animation-delay: 0.35s; }
+
+
+/* Large number display (e.g., 95%) */
+.hero-number {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 5px 0;
+  line-height: 1.1;
+  animation: slideInUp 0.5s ease-out 0.4s backwards; /* ANIMATION */
+}
+/* Label below the hero number (e.g., Accuracy) */
+.hero-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Sub-cards for Graph and Table (Base Styles) */
+.column-card,
+.graph-subcard,
+.detail-table-subcard {
+  margin: 0; /* No margin on the card itself, spacing handled by grid gap */
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 20px 25px;
+  box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  overflow: hidden; /* Needed for child overflow */
+  box-sizing: border-box; /* Include padding in height/width */
+}
+
+ /* Subheading placement within cards */
+.column-card .subheading,
+.graph-subcard .subheading,
+.detail-table-subcard .subheading {
+    margin-top: 0; /* Remove top margin for first heading */
+    margin-bottom: 15px;
+    padding: 0; /* Reset padding */
+}
+ /* Add top margin to subsequent headings within column-card / graph-card */
+.column-card .subheading:not(:first-of-type),
+.graph-subcard .subheading:not(:first-of-type) { /* UPDATED: Also apply to graph card */
+     margin-top: 25px;
+}
+
+/* Time Graph Container */
+.time-graph {
+  display: flex;
+  justify-content: center; /* Center the bars horizontally */
+  align-items: flex-end; /* Align bars at the bottom */
+  gap: 10px; /* Reduced gap */
+  margin-top: 10px; /* Reduced margin */
+  padding: 10px 10px 10px 0; /* Padding around bars */
+  min-height: 180px; /* Ensure space even if empty */
+  overflow-x: auto; /* Enable horizontal scroll if needed */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+   /* Custom Scrollbar styles */
+   scrollbar-width: thin; /* Firefox */
+   scrollbar-color: var(--text-secondary) var(--card-bg); /* Firefox */
+}
+/* Webkit Scrollbar styles */
+.time-graph::-webkit-scrollbar { height: 8px; }
+.time-graph::-webkit-scrollbar-track { background: var(--card-bg); border-radius: 4px; box-shadow: inset 1px 1px 2px var(--shadow-dark), inset -1px -1px 2px var(--shadow-light); }
+.time-graph::-webkit-scrollbar-thumb { background-color: var(--text-secondary); border-radius: 4px; box-shadow: 1px 1px 2px var(--shadow-dark), -1px -1px 2px var(--shadow-light); }
+.time-graph::-webkit-scrollbar-thumb:hover { background-color: var(--text-primary); }
+/* Individual Bar in Time Graph */
+.time-graph .bar { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; cursor: default; position: relative; outline: none; }
+/* Stagger animation for time graph bars */
+#resultCard.active .time-graph .bar,
+#reviewDetailCard.active .time-graph .bar { /* ADDED review card */
+    animation: slideInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+}
+#resultCard.active .time-graph .bar:nth-child(1),
+#reviewDetailCard.active .time-graph .bar:nth-child(1) { animation-delay: 0.2s; }
+#resultCard.active .time-graph .bar:nth-child(2),
+#reviewDetailCard.active .time-graph .bar:nth-child(2) { animation-delay: 0.22s; }
+#resultCard.active .time-graph .bar:nth-child(3),
+#reviewDetailCard.active .time-graph .bar:nth-child(3) { animation-delay: 0.24s; }
+#resultCard.active .time-graph .bar:nth-child(4),
+#reviewDetailCard.active .time-graph .bar:nth-child(4) { animation-delay: 0.26s; }
+#resultCard.active .time-graph .bar:nth-child(5),
+#reviewDetailCard.active .time-graph .bar:nth-child(5) { animation-delay: 0.28s; }
+#resultCard.active .time-graph .bar:nth-child(6),
+#reviewDetailCard.active .time-graph .bar:nth-child(6) { animation-delay: 0.30s; }
+#resultCard.active .time-graph .bar:nth-child(7),
+#reviewDetailCard.active .time-graph .bar:nth-child(7) { animation-delay: 0.32s; }
+#resultCard.active .time-graph .bar:nth-child(8),
+#reviewDetailCard.active .time-graph .bar:nth-child(8) { animation-delay: 0.34s; }
+#resultCard.active .time-graph .bar:nth-child(9),
+#reviewDetailCard.active .time-graph .bar:nth-child(9) { animation-delay: 0.36s; }
+#resultCard.active .time-graph .bar:nth-child(10),
+#reviewDetailCard.active .time-graph .bar:nth-child(10) { animation-delay: 0.38s; }
+
+.time-graph .bar:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; border-radius: 4px; }
+.bar-inner { width: 20px; border-radius: 6px 6px 0 0; box-shadow: 3px -3px 6px rgba(0,0,0,0.1); transition: height 0.5s ease-out, background 0.3s ease; pointer-events: none; }
+.bar-inner.correct { background: var(--pill-correct-bg); }
+.bar-inner.incorrect { background: var(--pill-incorrect-bg); }
+.bar-inner.skipped { background: var(--pill-skipped-bg); }
+.time-graph .bar .bar-label { margin-top: 8px; font-size: 12px; color: var(--text-secondary); text-align: center; font-weight: 500; pointer-events: none; }
+
+/* Detailed Results Table */
+/* This is the container on DESKTOP for the table */
+.detail-table-subcard {
+  overflow: hidden; /* Hide scrollbar for card itself */
+  -webkit-overflow-scrolling: touch;
+  /* Flex properties are defined in the desktop media query */
+}
+
+/* This wrapper is used INSIDE the desktop detail card to make the TABLE scroll */
+.table-scroll-wrapper {
+    /* Scroll properties are defined in the desktop media query */
+}
+
+table.detailed-results {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+    /* min-width is handled in desktop/mobile styles */
+    table-layout: auto; /* Let table determine column widths */
+}
+/* Animate the result details table rows */
+#resultCard.active .detailed-results tbody tr,
+#reviewDetailCard.active .detailed-results tbody tr { /* ADDED review card */
+    animation: fadeIn 0.5s ease backwards;
+}
+#resultCard.active .detailed-results tbody tr:nth-child(1),
+#reviewDetailCard.active .detailed-results tbody tr:nth-child(1) { animation-delay: 0.3s; }
+#resultCard.active .detailed-results tbody tr:nth-child(2),
+#reviewDetailCard.active .detailed-results tbody tr:nth-child(2) { animation-delay: 0.35s; }
+#resultCard.active .detailed-results tbody tr:nth-child(3),
+#reviewDetailCard.active .detailed-results tbody tr:nth-child(3) { animation-delay: 0.4s; }
+#resultCard.active .detailed-results tbody tr:nth-child(4),
+#reviewDetailCard.active .detailed-results tbody tr:nth-child(4) { animation-delay: 0.45s; }
+#resultCard.active .detailed-results tbody tr:nth-child(5),
+#reviewDetailCard.active .detailed-results tbody tr:nth-child(5) { animation-delay: 0.5s; }
+
+table.detailed-results th,
+table.detailed-results td {
+  text-align: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--shadow-dark);
+  font-size: 14px;
+  vertical-align: middle;
+  /* white-space handled in desktop/mobile styles */
+}
+ table.detailed-results th {
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom-width: 2px;
+    /* Sticky header handled in desktop styles */
+ }
+ table.detailed-results tr:last-child td { border-bottom: none; }
+ /* Cell alignment/padding handled in desktop/mobile styles */
+table.detailed-results .pill { margin-left: 5px; margin-right: 0; }
+
+/* Status/Speed Pills */
+.pill { display: inline-block; border-radius: 999px; padding: 5px 10px; font-size: 11px; font-weight: 600; margin-left: 8px; transition: all 0.3s ease; line-height: 1; vertical-align: middle; white-space: nowrap; animation: scaleIn 0.4s ease; /* ANIMATION */ }
+.pill-correct { color: var(--pill-correct-text); background-color: var(--pill-correct-bg); }
+.pill-incorrect { color: var(--pill-incorrect-text); background-color: var(--pill-incorrect-bg); }
+.pill-skipped { color: var(--pill-skipped-text); background-color: var(--pill-skipped-bg); }
+.pill-fast { color: var(--pill-fast-text); background-color: var(--pill-fast-bg); }
+.pill-slow { color: var(--pill-slow-text); background-color: var(--pill-slow-bg); }
+.pill-average { color: var(--pill-average-text); background-color: var(--pill-average-bg); }
+
+/* Mobile Detailed Results Container */
+#mobileDetailContainer,
+#reviewMobileDetailContainer { /* ADDED review container */
+    display: none;
+    margin: 20px 0 0 0;
+    padding: 0 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.mobile-detail-card { background: var(--card-bg); border-radius: 15px; padding: 15px 18px; margin-bottom: 15px; box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light); transition: all 0.3s ease; text-align: left; }
+/* Animate mobile detail cards */
+#resultCard.active .mobile-detail-card,
+#reviewDetailCard.active .mobile-detail-card { /* ADDED review card */
+    animation: fadeIn 0.5s ease backwards;
+}
+#resultCard.active #mobileDetailContainer .mobile-detail-card:nth-of-type(1),
+#reviewDetailCard.active #reviewMobileDetailContainer .mobile-detail-card:nth-of-type(1) { animation-delay: 0.3s; }
+#resultCard.active #mobileDetailContainer .mobile-detail-card:nth-of-type(2),
+#reviewDetailCard.active #reviewMobileDetailContainer .mobile-detail-card:nth-of-type(2) { animation-delay: 0.35s; }
+#resultCard.active #mobileDetailContainer .mobile-detail-card:nth-of-type(3),
+#reviewDetailCard.active #reviewMobileDetailContainer .mobile-detail-card:nth-of-type(3) { animation-delay: 0.4s; }
+#resultCard.active #mobileDetailContainer .mobile-detail-card:nth-of-type(4),
+#reviewDetailCard.active #reviewMobileDetailContainer .mobile-detail-card:nth-of-type(4) { animation-delay: 0.45s; }
+#resultCard.active #mobileDetailContainer .mobile-detail-card:nth-of-type(5),
+#reviewDetailCard.active #reviewMobileDetailContainer .mobile-detail-card:nth-of-type(5) { animation-delay: 0.5s; }
+
+
+.mobile-detail-card, .mobile-detail-card div, .mobile-detail-card span:not(.pill) { color: var(--text-primary); }
+.mobile-detail-header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 10px; border-bottom: 1px solid var(--shadow-dark); margin-bottom: 12px; gap: 10px; }
+.mobile-detail-question { font-size: 16px; font-weight: 600; line-height: 1.3; flex-grow: 1; }
+.mobile-detail-status { flex-shrink: 0; }
+.mobile-detail-status .pill { margin-left: 0; }
+.mobile-detail-body { font-size: 14px; line-height: 1.6; }
+.mobile-detail-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 10px; }
+.mobile-detail-row span:first-child { font-weight: 500; color: var(--text-secondary); flex-shrink: 0; }
+.mobile-detail-row span:last-child { font-weight: 500; text-align: right; word-break: break-all; }
+.mobile-detail-row .pill { margin-left: 5px; }
+.mobile-detail-row:last-child { margin-bottom: 0; }
+
+/* Challenge Score Container */
+#challengeScoreContainer,
+#reviewChallengeScoreContainer { /* ADDED review container */
+    display: none;
+}
+#challengeScoreContainer.active,
+#reviewChallengeScoreContainer.active { /* ADDED review container */
+    display: block;
+}
+.column-card #challengeScoreContainer,
+.column-card #reviewChallengeScoreContainer { /* ADDED review container */
+    margin-top: 25px; /* Space above challenge score inside column-card */
+}
+.column-card #challengeScoreContainer .subheading,
+.column-card #reviewChallengeScoreContainer .subheading { /* ADDED review container */
+    margin-top: 0; /* No extra top margin for challenge heading */
+}
+
+
+/* ============ INFO BUTTON & TOOLTIP/MODAL (Practice Area) ============ */
+/* Info container remains part of Practice area */
+#info-container { position: fixed; bottom: 20px; right: 20px; z-index: 1001; display: flex; flex-direction: column; align-items: flex-end; }
+#info-button { width: 48px; height: 48px; border-radius: 50%; background: var(--card-bg); color: var(--text-primary); border: none; font-size: 20px; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light); transition: all 0.3s ease; outline: none; position: relative; z-index: 1; }
+#info-button:hover { box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light); transform: scale(1.05); }
+#info-button:active { box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light); transform: scale(0.98); }
+#info-button:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light); }
+/* Desktop Tooltip */
+#info-tooltip { position: absolute; bottom: calc(100% + 10px); right: 0; overflow-y: auto; max-height: 80vh; width: max-content; max-width: 350px; background: var(--card-bg); color: var(--text-primary); padding: 20px; border-radius: 15px; box-shadow: 8px 8px 20px var(--shadow-dark), -8px -8px 20px var(--shadow-light); text-align: left; font-size: 13px; line-height: 1.6; opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.95); transform-origin: bottom right; transition: opacity 0.3s ease, visibility 0s linear 0.3s, transform 0.3s ease; pointer-events: none; z-index: 0; scrollbar-width: thin; scrollbar-color: var(--text-secondary) var(--card-bg); }
+#info-tooltip::-webkit-scrollbar { width: 6px; }
+#info-tooltip::-webkit-scrollbar-track { background: var(--card-bg); border-radius: 3px; }
+#info-tooltip::-webkit-scrollbar-thumb { background-color: var(--text-secondary); border-radius: 3px; }
+#info-tooltip::-webkit-scrollbar-thumb:hover { background-color: var(--text-primary); }
+/* Tooltip/Modal Content Styling */
+#info-tooltip h4, #info-modal-card .modal-content h4 { margin: 0 0 10px 0; font-size: 15px; color: var(--text-primary); border-bottom: 1px solid var(--shadow-dark); padding-bottom: 5px; }
+#info-tooltip ul, #info-modal-card .modal-content ul { margin: 0 0 15px 0; padding-left: 20px; list-style: disc; }
+#info-tooltip li, #info-modal-card .modal-content li { margin-bottom: 5px; }
+#info-tooltip strong, #info-modal-card .modal-content strong { font-weight: 600; color: var(--text-primary); }
+#info-tooltip.tooltip-visible { opacity: 1; visibility: visible; transform: translateY(0) scale(1); transition-delay: 0s, 0s, 0s; pointer-events: auto; z-index: 2; }
+/* Mobile Info Modal Overlay */
+#info-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1002; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; backdrop-filter: blur(3px); opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+#info-modal-overlay.modal-visible { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+/* ============ GRAPH TOOLTIP (Practice Area) ============ */
+#graphTooltip { position: fixed; background: var(--card-bg); color: var(--text-primary); padding: 10px 15px; border-radius: 10px; box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); font-size: 12px; line-height: 1.5; text-align: left; z-index: 1010; max-width: 250px; opacity: 0; visibility: hidden; transform: translateY(5px) scale(0.98); transform-origin: top left; transition: opacity 0.2s ease, visibility 0s linear 0.2s, transform 0.2s ease; pointer-events: none; white-space: normal; }
+#graphTooltip.tooltip-visible { opacity: 1; visibility: visible; transform: translateY(0) scale(1); transition-delay: 0s; }
+#graphTooltip strong { font-weight: 600; color: var(--text-secondary); margin-right: 5px; }
+#graphTooltip div { margin-bottom: 4px; }
+#graphTooltip div:last-child { margin-bottom: 0; }
+#graphTooltip .pill { padding: 3px 8px; font-size: 10px; margin-left: 4px; }
+
+/* Targeted Practice Section (Practice Area) */
+#section5 .targeted-type-selector, #section5 .targeted-inputs, #section5 .targeted-limit-type { margin: 20px auto; max-width: 400px; }
+#section5 .targeted-inputs label { display: block; margin-bottom: 5px; font-weight: 500; color: var(--text-secondary); font-size: 14px; }
+#section5 .targeted-inputs .input-bar { width: 100%; max-width: none; margin: 0 auto 15px auto; }
+#section5 .checkbox-options label { justify-content: center; }
+#section5 .input-pair { display: flex; gap: 15px; align-items: center; }
+#section5 .input-pair .input-bar { margin-bottom: 0; flex: 1; }
+#section5 .input-pair span { font-weight: 500; color: var(--text-secondary); }
+
+/* ============ PIE CHART STYLES (Practice & Review Areas) ============ */
+.pie-chart-heading {
+    margin-top: 30px; /* Space above the chart heading */
+    margin-bottom: 15px;
+}
+.summary-pie-chart-container {
+    width: 100%;
+    max-width: 200px; /* Adjusted max size */
+    margin: 0 auto; /* Center the chart */
+    aspect-ratio: 1 / 1; /* Make it square */
+    position: relative; /* For potential overlays or legends */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.summary-pie-chart-container svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg); /* Start chart from the top */
+    border-radius: 50%; /* Ensure clipping if needed */
+    /* Optional: add a subtle shadow to the SVG container */
+     box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+}
+.summary-pie-chart-container circle {
+    fill: none;
+    stroke-width: 20; /* Thickness of segments - Match JS */
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother animation */
+}
+/* Placeholder style */
+.pie-chart-placeholder {
+    text-align: center;
+    font-size: 14px;
+}
+/* Legend styles */
+.pie-chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 10px 20px; /* Adjusted gap */
+    margin-top: 20px; /* Space above legend */
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 0 10px; /* Padding */
+}
+.pie-chart-legend span {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    animation: fadeIn 0.5s ease backwards; /* ANIMATION */
+}
+.pie-chart-legend span:nth-of-type(2) { animation-delay: 0.1s; }
+.pie-chart-legend span:nth-of-type(3) { animation-delay: 0.2s; }
+
+.pie-chart-legend span::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px; /* Spacing */
+    background-color: var(--color); /* Custom property set by JS */
+     /* Add subtle shadow to legend dots */
+     box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+/* END PIE CHART STYLES */
+
+/* Visually Hidden Utility Class */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+
+/* ============ STUDY AREA SPECIFIC STYLES ============ */
+/* --- Main Container --- */
+#study-area .study-container { /* Renamed from .container to avoid conflict */
+    background-color: var(--card-bg); /* Use theme variable */
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+    width: 95%;
+    max-width: 1200px; /* Can adjust this */
+    margin-top: 20px;
+    position: relative;
+    font-family: 'Poppins', 'Segoe UI', sans-serif; /* Prioritize Poppins in study area */
+    color: var(--text-primary); /* Use theme color */
+}
+
+/* Header */
+#study-area h1 {
+    text-align: center;
+    color: var(--text-secondary); /* Use theme color */
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-shadow: 1px 1px 1px var(--shadow-light), -1px -1px 1px var(--shadow-dark); /* Use theme vars */
+    font-size: 2rem; /* Adjust size */
+}
+
+/* --- Tab Navigation --- */
+#study-area .tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+#study-area .tab-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--card-bg);
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    position: relative;
+}
+#study-area .tab-button:hover {
+    color: var(--text-primary);
+    box-shadow: 7px 7px 12px var(--shadow-dark), -7px -7px 12px var(--shadow-light);
+}
+#study-area .tab-button.active {
+    box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+#study-area .tab-button:focus-visible {
+     box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light), 0 0 0 2px var(--text-secondary);
+}
+
+/* --- Tab Content Area --- */
+#study-area .tab-content {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: inset 8px 8px 15px var(--shadow-dark), inset -8px -8px 15px var(--shadow-light);
+    display: none; /* Hide inactive tabs */
+}
+#study-area .tab-content.active {
+     display: block; /* Show active tab */
+     animation: fadeIn 0.5s ease; /* Use existing fadeIn animation */
+}
+
+/* General Content Styling */
+#study-area h2 {
+    text-align: center;
+    color: var(--text-primary); /* Darker for contrast */
+    margin-bottom: 25px;
+    font-weight: 600;
+    opacity: 0.8; /* Use opacity if desired */
+    font-size: 1.5rem; /* Adjust size */
+}
+
+/* --- Utility Controls --- */
+#study-area .controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+#study-area .control-item label {
+    margin-right: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+#study-area .neumorphic-input,
+#study-area .neumorphic-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+    outline: none;
+    transition: box-shadow 0.2s ease-in-out;
+}
+#study-area .neumorphic-button {
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    cursor: pointer;
+}
+#study-area .neumorphic-button:hover {
+    box-shadow: 7px 7px 12px var(--shadow-dark), -7px -7px 12px var(--shadow-light);
+}
+#study-area .neumorphic-button:active {
+    box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+}
+#study-area .neumorphic-input:focus-visible,
+#study-area .neumorphic-button:focus-visible {
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light), 0 0 0 2px var(--text-secondary);
+}
+#study-area .neumorphic-button:focus-visible {
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light), 0 0 0 2px var(--text-secondary);
+}
+
+/* --- Multiplication Tables Specific Styling --- */
+#study-area #multiplication-tables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+#study-area .table-block {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    text-align: center;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    font-size: 1.05rem;
+}
+#study-area .table-block:hover {
+     box-shadow: 7px 7px 14px var(--shadow-dark), -7px -7px 14px var(--shadow-light);
+     transform: translateY(-2px);
+}
+#study-area .table-block h3 {
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    font-size: 1.1em;
+    font-weight: 600;
+    opacity: 0.7; /* Adjusted opacity */
+}
+#study-area .table-block p {
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    border-radius: 4px;
+    padding: 2px 5px;
+    cursor: pointer;
+    position: relative;
+    font-size: 1.4em;
+    opacity: 0.5; /* Apply opacity to the question part */
+}
+ #study-area .table-block p:hover {
+     background-color: rgba(128, 128, 128, 0.1); /* Use theme hover effect */
+ }
+ .dark-mode #study-area .table-block p:hover {
+     background-color: rgba(200, 200, 200, 0.1);
+ }
+
+
+/* --- Squares and Cubes Specific Styling --- */
+#study-area #squares-tables-grid,
+#study-area #cubes-tables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+}
+#study-area .value-item {
+    background-color: var(--card-bg);
+    padding: 15px 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    text-align: center;
+    color: var(--text-primary);
+    transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+    font-size: 1.05rem;
+}
+ #study-area .value-item:hover {
+     box-shadow: 7px 7px 14px var(--shadow-dark), -7px -7px 14px var(--shadow-light);
+     transform: translateY(-2px);
+     background-color: rgba(128, 128, 128, 0.1); /* Use theme hover effect */
+ }
+ .dark-mode #study-area .value-item:hover {
+     background-color: rgba(200, 200, 200, 0.1);
+ }
+#study-area .value-item p {
+    display: inline-block;
+    opacity: 0.5; /* Apply opacity to the question part */
+    transition: opacity 0.2s ease;
+}
+#study-area .value-item sup {
+    font-size: 0.7em;
+    vertical-align: super;
+}
+
+/* Animation for items inside an active study tab */
+#study-area .tab-content.active .table-block,
+#study-area .tab-content.active .value-item {
+    animation: scaleIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+}
+
+/* Stagger the first few items for effect */
+#study-area .tab-content.active .table-block:nth-child(1),
+#study-area .tab-content.active .value-item:nth-child(1) { animation-delay: 0.05s; }
+#study-area .tab-content.active .table-block:nth-child(2),
+#study-area .tab-content.active .value-item:nth-child(2) { animation-delay: 0.10s; }
+#study-area .tab-content.active .table-block:nth-child(3),
+#study-area .tab-content.active .value-item:nth-child(3) { animation-delay: 0.15s; }
+#study-area .tab-content.active .table-block:nth-child(4),
+#study-area .tab-content.active .value-item:nth-child(4) { animation-delay: 0.20s; }
+#study-area .tab-content.active .table-block:nth-child(5),
+#study-area .tab-content.active .value-item:nth-child(5) { animation-delay: 0.25s; }
+#study-area .tab-content.active .table-block:nth-child(6),
+#study-area .tab-content.active .value-item:nth-child(6) { animation-delay: 0.30s; }
+#study-area .tab-content.active .table-block:nth-child(7),
+#study-area .tab-content.active .value-item:nth-child(7) { animation-delay: 0.35s; }
+#study-area .tab-content.active .table-block:nth-child(8),
+#study-area .tab-content.active .value-item:nth-child(8) { animation-delay: 0.40s; }
+
+
+/* --- Make Answers Prominent --- */
+#study-area .answer-value {
+    color: var(--nav-active-text); /* Use a theme color for answers */
+    font-weight: 600;
+    opacity: 1; /* Counteract parent opacity */
+}
+
+/* --- Hide Answers Functionality --- */
+#study-area.answers-hidden .answer-value {
+    opacity: 0 !important;
+    transition: opacity 0.2s ease;
+}
+#study-area.answers-hidden .table-block p:hover .answer-value,
+#study-area.answers-hidden .value-item:hover .answer-value {
+    opacity: 0 !important;
+}
+
+ /* --- Click Highlight Functionality --- */
+ #study-area .table-block p.highlighted,
+ #study-area .value-item.highlighted {
+     box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+     background-color: var(--card-bg);
+ }
+ #study-area .table-block p.highlighted {
+      opacity: 1;
+  }
+ #study-area .value-item.highlighted p {
+     opacity: 1;
+ }
+ #study-area .table-block p.highlighted:hover {
+     opacity: 1;
+     transform: none;
+     background-color: var(--card-bg); /* Keep background consistent */
+ }
+  #study-area .value-item.highlighted:hover {
+      box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+      transform: none;
+ }
+ #study-area .value-item.highlighted:hover p {
+     opacity: 1;
+     background-color: transparent;
+ }
+ #study-area .table-block p.highlighted .answer-value,
+ #study-area .value-item.highlighted .answer-value {
+      opacity: 1;
+  }
+/* END STUDY AREA SPECIFIC STYLES */
+
+/* ============ DASHBOARD AREA SPECIFIC STYLES (ENHANCED) ============ */
+.dashboard-card {
+    width: 95%;
+    max-width: 1200px; /* Wider card for dashboard */
+    padding: 30px 35px;
+    margin: 20px 0;
+    border-radius: 25px;
+    background: var(--card-bg);
+    box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.dashboard-card .subheading {
+    text-align: left;
+    margin: 40px 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--shadow-dark);
+}
+.dashboard-card .subheading:first-of-type {
+    margin-top: 10px;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    text-align: left;
+}
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+    margin-top: 15px;
+    table-layout: fixed; /* For equal columns */
+}
+.dashboard-table th, .dashboard-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--shadow-dark);
+    font-size: 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+.dashboard-table th {
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom-width: 2px;
+}
+.dashboard-table tr:last-child td {
+    border-bottom: none;
+}
+.dashboard-table td:not(:first-child) {
+    text-align: center; /* Center numerical data */
+    font-weight: 500;
+}
+ .dashboard-table th:not(:first-child) {
+    text-align: center;
+}
+.dashboard-table .type-name {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+#dashboard-area .subcards {
+    margin-bottom: 0;
+    justify-content: flex-start;
+}
+ #dashboard-area .result-subcard {
+     flex-basis: 150px; /* Fixed base width */
+     animation: scaleIn 0.4s ease-out backwards;
+}
+#dashboard-area #overall-stats .result-subcard:nth-child(1) { animation-delay: 0.1s; }
+#dashboard-area #overall-stats .result-subcard:nth-child(2) { animation-delay: 0.15s; }
+#dashboard-area #overall-stats .result-subcard:nth-child(3) { animation-delay: 0.2s; }
+#dashboard-area #overall-stats .result-subcard:nth-child(4) { animation-delay: 0.25s; }
+#dashboard-area #overall-stats .result-subcard:nth-child(5) { animation-delay: 0.3s; }
+
+#dashboard-area .dashboard-grid,
+#dashboard-area .subheading {
+    animation: fadeIn 0.5s ease backwards;
+}
+ #dashboard-area .dashboard-grid { animation-delay: 0.2s; }
+
+ .mastery-bar-container {
+    width: 100%;
+    height: 10px;
+    background: var(--card-bg);
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+    overflow: hidden;
+ }
+ .mastery-bar {
+    height: 100%;
+    background-color: var(--mastery-color);
+    border-radius: 5px;
+    transition: width 0.5s ease-out;
+ }
+ .review-time {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+ }
+ /* NEW: Styles for Dashboard Trend Charts */
+ #dashboard-trends .graph-subcard {
+    min-height: 250px; /* Give charts some default height */
+    display: flex;
+    flex-direction: column;
+ }
+ #dashboard-trends .time-graph { /* Reusing time-graph for trend charts */
+    flex-grow: 1;
+    width: 100%;
+    padding: 10px 0;
+ }
+
+/* ============ REVIEW AREA SPECIFIC STYLES (NEW) ============ */
+#review-area #reviewListCard {
+    animation: fadeIn 0.5s ease;
+}
+#session-list-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.session-list-item {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 15px 20px;
+    box-shadow: 5px 5px 12px var(--shadow-dark), -5px -5px 12px var(--shadow-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+    outline: none;
+}
+.session-list-item:hover, .session-list-item:focus-visible {
+    box-shadow: 7px 7px 14px var(--shadow-dark), -7px -7px 14px var(--shadow-light);
+    transform: translateY(-2px);
+    border-color: var(--text-secondary);
+}
+.session-list-item:active {
+    box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+    transform: translateY(0);
+}
+.session-list-info {
+    flex: 1 1 250px;
+    text-align: left;
+}
+.session-list-info .date {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--text-primary);
+}
+.session-list-info .mode {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    text-transform: capitalize;
+}
+.session-list-stats {
+    flex: 2 1 300px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.session-list-stats .stat {
+    font-size: 0.95em;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+.session-list-stats .stat .label {
+    color: var(--text-secondary);
+    margin-right: 5px;
+}
+#review-area #reviewDetailCard {
+    /* Uses .secondary-card styles, which is correct */
+    /* All child elements use existing result card classes and will be styled automatically */
+}
+
+/* ============ BACK TO TOP BUTTON (Global) ============ */
+#back-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--card-bg);
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 50%; /* Circle */
+    box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    font-size: 1.5rem; /* Adjust size for arrow */
+    line-height: 50px; /* Center arrow vertically */
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s, box-shadow 0.2s ease, transform 0.3s ease-in-out; /* Added transform transition */
+    transform: translateY(10px); /* Start slightly lower */
+}
+#back-to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+    transform: translateY(0);
+}
+#back-to-top-btn:hover {
+    color: var(--text-primary);
+    box-shadow: 7px 7px 12px var(--shadow-dark), -7px -7px 12px var(--shadow-light);
+}
+#back-to-top-btn:active {
+    box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+}
+#back-to-top-btn:focus-visible {
+     box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light), 0 0 0 2px var(--text-secondary);
+ }
+
+/* ============ DESKTOP LAYOUT (Overrides for min-width: 601px) ============ */
+@media (min-width: 601px) {
+    #practice-area, #study-area, #dashboard-area, #review-area { /* ADDED review-area */
+        padding: 0 20px; /* Slightly more padding on desktop */
+    }
+
+    /* --- Practice & Review Area Desktop --- */
+    #resultCard, #reviewDetailCard { /* ADDED reviewDetailCard */
+        width: 95%;
+        max-width: 1600px; /* Increased max-width for desktop */
+        padding: 40px 45px; /* Increased padding */
+    }
+    .result-columns {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+        gap: 30px; /* Space between columns */
+        align-items: stretch; /* MODIFIED: Make columns stretch vertically */
+        width: 100%; /* Ensure container takes full width */
+        margin-bottom: 35px; /* Space before Play Again button */
+    }
+    .result-column {
+        display: flex; /* Use flex to help children stretch */
+        flex-direction: column;
+        min-height: 0; /* Prevent flex/grid items from overflowing containers */
+        min-width: 0; /* Prevent grid blow out */
+    }
+    /* Column 1: Summary Card */
+    .result-column-1 .column-card {
+        flex-grow: 1; /* MODIFIED: Ensure card grows */
+        display: flex;
+        flex-direction: column;
+    }
+     /* Adjust spacing inside column-card */
+     .result-column-1 .column-card .subheading {
+         margin-top: 0;
+         margin-bottom: 15px;
+     }
+     .result-column-1 .column-card .subheading:not(:first-of-type) {
+        margin-top: 30px;
+     }
+     .result-column-1 .column-card .subcards {
+         margin-bottom: 0;
+     }
+     .result-column-1 .column-card #challengeScoreContainer,
+     .result-column-1 .column-card #reviewChallengeScoreContainer { /* ADDED review container */
+         margin-top: 30px;
+         margin-bottom: 0;
+     }
+      .result-column-1 .column-card > *:last-child {
+        margin-bottom: 0;
+      }
+      /* Make pie chart section take remaining space if needed */
+      .result-column-1 .column-card .pie-chart-heading {
+            margin-top: 30px;
+            flex-shrink: 0; /* Prevent heading shrinking */
+        }
+       .result-column-1 .column-card .summary-pie-chart-container {
+            max-width: 220px;
+            margin-top: auto; /* Push chart down if space allows */
+            margin-bottom: 0;
+            flex-shrink: 0;
+       }
+       .result-column-1 .column-card .pie-chart-legend {
+            margin-top: 15px;
+            margin-bottom: 0;
+            flex-shrink: 0;
+       }
+    /* Column 2: Graph & Time Analysis */
+    .result-column-2 .graph-subcard {
+        flex-grow: 1; /* MODIFIED: Ensure card grows */
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 20px 25px;
+    }
+    .result-column-2 .graph-subcard .subheading {
+         margin-bottom: 10px;
+         flex-shrink: 0;
+    }
+     .result-column-2 .graph-subcard .subheading:not(#time-graph-heading):not(#review-time-graph-heading) { /* ADDED review heading ID */
+         margin-top: 30px;
+         margin-bottom: 15px;
+     }
+    .result-column-2 .graph-subcard #timeGraph,
+    .result-column-2 .graph-subcard #reviewTimeGraph { /* ADDED review graph ID */
+        flex-grow: 1; /* Allow graph itself to take remaining vertical space */
+        min-height: 250px;
+        display: flex; /* Ensure bars align */
+        flex-direction: row; /* Default, but explicit */
+        align-items: flex-end;
+        justify-content: center;
+    }
+    .result-column-2 .graph-subcard .subcards {
+        margin-bottom: 0;
+        margin-top: auto; /* Push time analysis down */
+        flex-shrink: 0;
+    }
+    /* Column 3: Table */
+    .result-column-3 .detail-table-subcard {
+        flex-grow: 1; /* MODIFIED: Ensure card grows */
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
+    }
+     .result-column-3 .detail-table-subcard .subheading {
+        flex-shrink: 0;
+        margin-bottom: 15px;
+        padding: 20px 25px 0 25px;
+     }
+    /* Make the table container scrollable */
+    .result-column-3 .detail-table-subcard .table-scroll-wrapper {
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex-grow: 1; /* Allow wrapper to take remaining space */
+        padding: 0 25px 20px 25px;
+        min-height: 0;
+        scrollbar-width: thin;
+        scrollbar-color: var(--text-secondary) var(--card-bg);
+    }
+     .result-column-3 .detail-table-subcard .table-scroll-wrapper::-webkit-scrollbar { width: 8px; }
+     .result-column-3 .detail-table-subcard .table-scroll-wrapper::-webkit-scrollbar-track { background: var(--card-bg); border-radius: 4px; box-shadow: inset 1px 1px 2px var(--shadow-dark), inset -1px -1px 2px var(--shadow-light); }
+     .result-column-3 .detail-table-subcard .table-scroll-wrapper::-webkit-scrollbar-thumb { background-color: var(--text-secondary); border-radius: 4px; box-shadow: 1px 1px 2px var(--shadow-dark), -1px -1px 2px var(--shadow-light); }
+     .result-column-3 .detail-table-subcard .table-scroll-wrapper::-webkit-scrollbar-thumb:hover { background-color: var(--text-primary); }
+
+    /* Table styling inside scroll wrapper */
+    .result-column-3 .detail-table-subcard table.detailed-results {
+        width: 100%;
+        min-width: 0;
+        border-collapse: collapse;
+    }
+    .result-column-3 .detail-table-subcard table.detailed-results thead {
+        position: sticky;
+        top: 0;
+        background: var(--card-bg);
+        z-index: 1;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-bottom: none;
+    }
+     .dark-mode .result-column-3 .detail-table-subcard table.detailed-results thead {
+         box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+     }
+    .result-column-3 .detail-table-subcard table.detailed-results th,
+    .result-column-3 .detail-table-subcard table.detailed-results td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid var(--shadow-dark);
+        vertical-align: middle;
+        white-space: normal;
+    }
+    .result-column-3 .detail-table-subcard table.detailed-results th {
+        font-weight: 600;
+        color: var(--text-secondary);
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        border-bottom-color: var(--shadow-dark);
+    }
+    .result-column-3 .detail-table-subcard table.detailed-results td:first-child,
+    .result-column-3 .detail-table-subcard table.detailed-results th:first-child {
+        text-align: left;
+        padding-left: 0;
+        min-width: 100px; /* Reduced min-width */
+        width: 35%; /* Suggest a relative width, adjust as needed */
+    }
+     /* Adjust other column widths (optional, auto-layout might be fine) */
+    .result-column-3 .detail-table-subcard table.detailed-results th:nth-child(2),
+    .result-column-3 .detail-table-subcard table.detailed-results td:nth-child(2) { width: 25%; }
+    .result-column-3 .detail-table-subcard table.detailed-results th:nth-child(3),
+    .result-column-3 .detail-table-subcard table.detailed-results td:nth-child(3) { width: 25%; }
+    .result-column-3 .detail-table-subcard table.detailed-results th:nth-child(4),
+    .result-column-3 .detail-table-subcard table.detailed-results td:nth-child(4) { width: 15%; }
+
+    .result-column-3 .detail-table-subcard table.detailed-results td:last-child,
+    .result-column-3 .detail-table-subcard table.detailed-results th:last-child {
+        padding-right: 0;
+    }
+    .result-column-3 .detail-table-subcard table.detailed-results tr:last-child td {
+        border-bottom: none;
+    }
+    /* Hide mobile details container on desktop */
+    #mobileDetailContainer, #reviewMobileDetailContainer { /* ADDED review container */
+        display: none !important;
+    }
+    #detailTableSubcard, #reviewDetailTableSubcard { /* ADDED review container */
+         display: flex !important;
+     }
+    /* Ensure Play Again button is centered below the columns */
+    #resultCard .session-actions, #reviewDetailCard .session-actions { /* ADDED review card */
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    /* --- Study Area Desktop --- */
+    /* Styles already prefixed should work */
+}
+
+/* ============ MEDIA QUERIES (Mobile - max-width: 600px) ============ */
+@media (max-width: 600px) {
+  :root {
+      --header-height: 70px; /* Adjust header height for mobile */
+  }
+  body { padding-top: var(--header-height); padding-bottom: 70px; }
+
+  /* === Mobile Header Adjustments === */
+  .page-tab {
+       justify-content: space-between; /* Space out items */
+       align-items: center;
+       padding: 0 16px; /* Vertical padding handled by height */
+       font-size: 20px;
+       position: relative; /* Needed for absolute positioning inside */
+  }
+   /* Hamburger Button Mobile */
+  .hamburger-btn {
+      position: static; /* Let flexbox handle positioning */
+      order: 1; /* Move to the left */
+      transform: none; /* Reset transform */
+      width: 40px;
+      height: 40px;
+      gap: 4px;
+      box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+  }
+   .hamburger-btn span { width: 18px; height: 2px; }
+   .hamburger-btn.active span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+   .hamburger-btn.active span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+   .hamburger-btn:hover { transform: scale(1.05); box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); }
+   .hamburger-btn:active { transform: scale(0.98); box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); }
+   .hamburger-btn:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); }
+  /* Title */
+  .page-title {
+      position: absolute; /* Center title absolutely */
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      order: 2; /* Title comes logically after hamburger */
+      flex-grow: 0;
+      text-align: center;
+      margin: 0; /* Remove margin */
+      font-size: 18px; /* Slightly smaller title on mobile */
+      font-weight: 600;
+      white-space: nowrap; /* Prevent wrapping */
+      /* Adjusted max-width: space for two 40px buttons + padding (16px*2) */
+      max-width: calc(100% - 80px - 32px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+  /* Theme Toggle */
+  .toggle-btn {
+      position: static;
+      order: 3; /* Move theme toggle to the right */
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      margin: 0;
+      box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+      transform: none;
+  }
+  .toggle-btn:hover { transform: scale(1.05); box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); }
+  .toggle-btn:active { transform: scale(0.98); box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); }
+  .toggle-btn:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); }
+
+  /* Keep the dedicated info container hidden on mobile */
+  #info-container { display: none !important; }
+
+  /* === General Mobile Styles === */
+   #practice-area, #study-area, #dashboard-area, #review-area { /* ADDED review-area */
+       padding: 0 5px; /* Reduced padding for areas on mobile */
+   }
+  .neumorphic-card, .secondary-card, .dashboard-card { width: 95%; padding: 20px 18px; margin: 15px 0; border-radius: 20px; }
+  .neumorphic-card h2, .secondary-card h2, .dashboard-card h2 { font-size: 22px; margin-bottom: 20px; }
+  .section-buttons { gap: 8px; }
+  .section-buttons button { flex: 1 1 40%; min-width: 100px; padding: 10px 6px; font-size: 13px; white-space: nowrap; }
+  .input-bar { width: 90%; max-width: none; margin: 20px auto; padding: 12px 15px; font-size: 15px; }
+  .checkbox-group { margin: 20px 0; }
+  .checkbox-title { font-size: 15px; margin-bottom: 12px; }
+  .checkbox-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px 15px; width: 95%; margin: 0 auto; }
+  .checkbox-options label { font-size: 14px; justify-content: flex-start; }
+  .checkbox-options input[type="checkbox"], .checkbox-options input[type="radio"] { width: 20px; height: 20px; margin-right: 8px; }
+  .checkbox-options input[type="checkbox"]:checked, .checkbox-options input[type="radio"]:checked { box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); }
+  .start-btn { width: 85%; margin: 25px auto 10px auto; padding: 12px; font-size: 16px; }
+  .progress-container { width: 90%; height: 8px; margin: 20px auto; }
+  .status-indicator { font-size: 13px; margin-top: 8px; margin-bottom: 8px; line-height: 1.3; }
+  .session-question { font-size: 18px; margin: 20px 5px; }
+  .session-actions { margin-top: 20px; gap: 15px; }
+  .session-actions button { flex: 1; max-width: 140px; padding: 10px 5px; font-size: 14px; }
+  #resultCard .session-actions, #reviewDetailCard .session-actions { /* ADDED review card */
+      margin-top: 30px;
+  }
+
+  /* === Mobile Result Card Adjustments (Practice & Review) === */
+   .result-columns { display: block; /* Stack columns vertically */ }
+   .result-column { margin-bottom: 20px; /* Space between stacked sections */ }
+   .result-column:last-child { margin-bottom: 0; }
+   /* Ensure cards in columns take auto height */
+   .result-column-1 .column-card,
+   .result-column-2 .graph-subcard,
+   .result-column-3 .detail-table-subcard {
+       height: auto; /* Let content dictate height */
+       min-height: 0; /* Remove min height */
+       padding: 15px 18px; /* Mobile padding */
+   }
+   .result-column-1 .column-card {
+        margin-bottom: 0; /* Remove column margin, spacing controlled by .result-column */
+   }
+    .result-column-2 .graph-subcard {
+       margin-top: 0; /* Ensure consistent spacing */
+       margin-bottom: 0;
+   }
+   /* Hide the desktop table container AND its scroll wrapper on mobile */
+   .result-column-3 .detail-table-subcard {
+        display: none !important;
+   }
+    #mobileDetailContainer, #reviewMobileDetailContainer { /* ADDED review container */
+        display: block !important; /* Show mobile cards container */
+        margin-top: 0; /* Adjust margin if needed */
+    }
+
+  .subheading { font-size: 18px; margin: 20px 0 12px 0; } /* Adjusted margin */
+   /* Subheading inside mobile column-card */
+   .column-card .subheading, .graph-subcard .subheading { /* UPDATED */
+       margin: 15px 0 12px 0;
+   }
+   .column-card .subheading:first-of-type, .graph-subcard .subheading:first-of-type { /* UPDATED */
+        margin-top: 0;
+   }
+
+  .subcards { gap: 10px; margin-bottom: 15px; } /* Reduced margin */
+   .column-card .subcards, .graph-subcard .subcards { /* UPDATED */
+       margin-bottom: 0;
+   }
+
+  .result-subcard { flex: 1 1 40%; min-width: 90px; padding: 15px 10px; }
+  .result-subcard#challengeScoreCard, .result-subcard#streakCard, .result-subcard#totalTimeCard,
+  .result-subcard#reviewChallengeScoreCard, .result-subcard#reviewStreakCard, .result-subcard#reviewTotalTimeCard { /* ADDED review cards */
+      flex-basis: 40%;
+  }
+  .hero-number { font-size: 28px; }
+  .hero-label { font-size: 12px; }
+  .graph-subcard { padding: 15px 15px; } /* Keep padding for graph card */
+  .time-graph { margin-top: 20px; gap: 8px; padding: 10px 5px 10px 0; min-height: 150px; }
+  .bar-inner { width: 16px; border-radius: 4px 4px 0 0; }
+  /* Mobile Detail Card adjustments */
+  .mobile-detail-card { padding: 12px 15px; }
+  .mobile-detail-question { font-size: 15px; }
+  .mobile-detail-body { font-size: 13px; }
+  .mobile-detail-row span:first-child { color: var(--text-secondary); }
+
+   /* Pie chart adjustments for mobile */
+   .pie-chart-heading { margin-top: 25px; }
+   .summary-pie-chart-container { max-width: 160px; } /* Smaller chart */
+   .pie-chart-legend { margin-top: 15px; gap: 8px 15px; font-size: 11px; }
+   .pie-chart-legend span::before { width: 10px; height: 10px; }
+
+  /* Hide Desktop Tooltip & Graph Tooltip */
+  #info-tooltip { display: none !important; }
+  #graphTooltip { display: none !important; }
+
+  /* === Mobile Info Modal Styles === */
+  #info-modal-card { background: var(--card-bg); color: var(--text-primary); border-radius: 20px; padding: 0; box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light); width: 100%; max-width: 95%; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; position: relative; transform: scale(0.95); opacity: 0; transition: opacity 0.3s 0.1s ease, transform 0.3s 0.1s ease; }
+  #info-modal-overlay.modal-visible #info-modal-card { opacity: 1; transform: scale(1); }
+  .modal-header { padding: 15px 50px 15px 25px; position: relative; border-bottom: 1px solid var(--shadow-dark); flex-shrink: 0; background: var(--card-bg); border-radius: 20px 20px 0 0; display: flex; align-items: center; }
+  .modal-header #info-modal-heading { margin: 0; font-size: 18px; color: var(--text-primary); font-weight: 600; line-height: 1.3; flex-grow: 1; text-align: center; }
+  #info-modal-close { position: absolute; top: 50%; right: 15px; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: var(--card-bg); color: var(--text-primary); border: none; font-size: 24px; font-weight: bold; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light); transition: all 0.2s ease; padding: 0; outline: none; }
+  #info-modal-close:hover { box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); transform: translateY(-50%) scale(1.05); }
+  #info-modal-close:active { box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); transform: translateY(-50%) scale(0.95); }
+  #info-modal-close:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); }
+  .modal-content { padding: 15px 25px; overflow-y: auto; flex-grow: 1; text-align: left; font-size: 14px; line-height: 1.6; color: var(--text-primary); }
+  .modal-content h4 { margin: 15px 0 10px 0; font-size: 15px; color: var(--text-primary); border-bottom: 1px solid var(--shadow-dark); padding-bottom: 5px; }
+  .modal-content h4:first-child { margin-top: 0; }
+  .modal-content ul { margin: 0 0 15px 0; padding-left: 20px; list-style: disc; }
+  .modal-content li { margin-bottom: 5px; }
+  .modal-content strong { font-weight: 600; color: var(--text-primary); }
+  .modal-content::-webkit-scrollbar { width: 8px; }
+  .modal-content::-webkit-scrollbar-track { background: var(--card-bg); border-radius: 10px; box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light); }
+  .modal-content::-webkit-scrollbar-thumb { background-color: var(--text-secondary); border-radius: 10px; box-shadow: 2px 2px 5px var(--shadow-dark), -2px -2px 5px var(--shadow-light); }
+  .modal-content::-webkit-scrollbar-thumb:hover { background-color: var(--text-primary); }
+  .modal-content { scrollbar-width: thin; scrollbar-color: var(--text-secondary) var(--card-bg); }
+
+  /* Targeted Practice Mobile Adjustments */
+  #section5 .targeted-type-selector .checkbox-options label span, #section5 .targeted-limit-type .checkbox-options label span { font-size: 13px; }
+  #section5 .targeted-type-selector .checkbox-options, #section5 .targeted-limit-type .checkbox-options { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+  #section5 .input-pair { flex-direction: column; align-items: stretch; gap: 8px; }
+  #section5 .input-pair span { text-align: center; margin: 5px 0; }
+
+  /* --- Study Area Mobile Adjustments --- */
+  #study-area .study-container { padding: 15px; box-shadow: 8px 8px 15px var(--shadow-dark), -8px -8px 15px var(--shadow-light); }
+  #study-area h1 { font-size: 1.8rem; }
+  #study-area .tab-button { padding: 10px 15px; font-size: 0.95rem; }
+  #study-area .tab-content { /* Removed positioning overrides */ padding: 15px; margin-top: 15px; box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);}
+  #study-area #multiplication-tables-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+  #study-area #squares-tables-grid, #study-area #cubes-tables-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
+  #study-area .table-block, #study-area .value-item { font-size: 1rem; }
+  #study-area .controls { flex-direction: column; align-items: stretch; gap: 10px; }
+  #study-area .control-item { text-align: center; }
+  #study-area .control-item label { margin-right: 0; margin-bottom: 5px; display: block;}
+  #study-area .neumorphic-input, #study-area .neumorphic-button { width: 100%; text-align: center; }
+  #back-to-top-btn { width: 45px; height: 45px; font-size: 1.3rem; line-height: 45px; bottom: 15px; right: 15px;}
+
+  /* === Mobile Dashboard Adjustments === */
+  .dashboard-grid { grid-template-columns: 1fr; /* Stack tables vertically */ }
+  .dashboard-table { table-layout: auto; } /* Let table resize columns */
+  .dashboard-table th, .dashboard-table td { font-size: 14px; padding: 10px 8px; }
+  #dashboard-trends .graph-subcard { min-height: 200px; } /* Adjust chart height for mobile */
+
+  /* === Mobile Review Area Adjustments (NEW) === */
+  .session-list-item { flex-direction: column; align-items: flex-start; }
+  .session-list-stats { justify-content: flex-start; gap: 10px 15px; }
+  .session-list-stats .stat { font-size: 0.9em; }
+
+} /* End of @media (max-width: 600px) */
+
+@media (max-width: 480px) {
+    body { padding-bottom: 60px; }
+
+    /* === Mobile Header (Small) === */
+    .page-title { font-size: 16px; max-width: calc(100% - 70px - 24px); } /* Further reduce size/space */
+    .hamburger-btn, .toggle-btn { width: 36px; height: 36px; }
+    .hamburger-btn span { width: 16px; }
+    .hamburger-btn.active span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+    .hamburger-btn.active span:nth-child(3) { transform: translateY(-4px) rotate(-45deg); }
+    .toggle-btn { font-size: 16px; }
+
+    /* === Practice Area Mobile (Small) === */
+    .neumorphic-card, .secondary-card, .dashboard-card { padding: 15px 12px; border-radius: 15px; }
+    .neumorphic-card h2, .secondary-card h2, .dashboard-card h2 { font-size: 20px; }
+    .section-buttons button { font-size: 12px; padding: 8px 5px; min-width: 80px; }
+    .input-bar { padding: 10px 12px; font-size: 14px; }
+    .checkbox-options { gap: 8px 10px; }
+    .checkbox-options label { font-size: 13px; }
+    .checkbox-options input[type="checkbox"], .checkbox-options input[type="radio"] { width: 18px; height: 18px; }
+    .start-btn { font-size: 15px; padding: 10px; }
+    .progress-container { height: 6px; }
+    .status-indicator { font-size: 12px; }
+    .session-question { font-size: 16px; }
+    .session-actions button { font-size: 13px; padding: 8px 5px; max-width: 120px; }
+    .result-subcard { min-width: 80px; padding: 12px 8px; }
+    .hero-number { font-size: 24px; }
+    .hero-label { font-size: 11px; }
+    .bar-inner { width: 14px; }
+    .mobile-detail-card { padding: 10px 12px; }
+    .mobile-detail-question { font-size: 14px; }
+    .mobile-detail-body { font-size: 12px; }
+
+    /* === Study Area Mobile (Small) === */
+    #study-area .study-container { padding: 10px; border-radius: 15px; box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); }
+    #study-area h1 { font-size: 1.5rem; margin-bottom: 20px; }
+    #study-area .tab-container { gap: 8px; margin-bottom: 15px; }
+    #study-area .tab-button { padding: 8px 12px; font-size: 0.9rem; border-radius: 10px; box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); }
+    #study-area .tab-button.active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); }
+    #study-area .tab-button:focus-visible { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light), 0 0 0 2px var(--text-secondary); }
+    #study-area .tab-content { padding: 10px; margin-top: 10px; box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);}
+    #study-area h2 { font-size: 1.2rem; margin-bottom: 15px; }
+    #study-area #multiplication-tables-grid { grid-template-columns: 1fr; gap: 10px; } /* Stack tables vertically */
+    #study-area #squares-tables-grid, #study-area #cubes-tables-grid { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 8px; }
+    #study-area .table-block, #study-area .value-item { font-size: 0.95rem; }
+    #study-area .table-block h3 { font-size: 1.1em; }
+    #study-area .value-item sup { font-size: 0.7em; }
+    #back-to-top-btn { width: 40px; height: 40px; font-size: 1.2rem; line-height: 40px; bottom: 10px; right: 10px;}
+
+    /* === Review Area Mobile (Small) (NEW) === */
+    .session-list-stats { gap: 8px 12px; }
+    .session-list-stats .stat { font-size: 0.85em; }
+
+} /* End of @media (max-width: 480px) */
