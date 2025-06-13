@@ -1453,8 +1453,20 @@ table.detailed-results .pill { margin-left: 5px; margin-right: 0; }
  #dashboard-trends .graph-subcard {
     min-height: 250px; /* Give charts some default height */
     display: flex;
-    flex-direction: column;
- }
+  flex-direction: column;
+}
+
+/* Simple achievement badge */
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  margin: 4px;
+  border-radius: 12px;
+  background: #4caf50;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
  #dashboard-trends .time-graph { /* Reusing time-graph for trend charts */
     flex-grow: 1;
     width: 100%;
