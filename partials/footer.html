@@ -1,0 +1,56 @@
+  <!-- ============ MOBILE INFO MODAL (Remains outside specific areas) ============ -->
+  <div id="info-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="info-modal-heading" tabindex="-1">
+      <div id="info-modal-card">
+          <div class="modal-header">
+              <h4 id="info-modal-heading">Information</h4>
+              <button id="info-modal-close" aria-label="Close Information">×</button>
+          </div>
+          <div class="modal-content">
+               <h4>Modes</h4>
+              <ul>
+                  <li><strong>Fixed Questions:</strong> Answer a set number of questions. Select types and difficulties freely.</li>
+                  <li><strong>Fixed Time:</strong> Answer as many questions as possible within the time limit. Select types and difficulties freely.</li>
+                   <li><strong>Adaptive (Enhanced):</strong> Difficulty now adapts based on your long-term performance, focusing on your weakest areas using mastery scores and spaced repetition. In-session difficulty still adjusts based on correct/incorrect streaks.</li>
+                  <li><strong>Challenge:</strong> Time-based mode. Start at a chosen difficulty. Correct answers add time bonus (Easy:+0.5s, Exp:+2s) & difficulty ↑ after 3 correct. Incorrect answers reset difficulty streak.</li>
+                  <li><strong>Targeted:</strong> Practice a specific multiplication table, or a specific range of squares or cubes. Choose number of questions or time limit.</li>
+              </ul>
+              <h4>Question Types</h4>
+              <ul>
+                  <li><strong>Multiplication:</strong> e.g., 12 × 5</li>
+                  <li><strong>Squares:</strong> e.g., 15²</li>
+                  <li><strong>Cubes:</strong> e.g., 7³</li>
+                  <li><strong>Square Root:</strong> e.g., √144 (only perfect squares)</li>
+                  <li><strong>Cube Root:</strong> e.g., ³√125 (only perfect cubes)</li>
+                  <li><strong>Fractions (Decimal Value):</strong> e.g., 3/8? (answer as decimal: 0.375)</li>
+              </ul>
+              <h4>Difficulty Levels (Approx. Number Ranges / Effect)</h4>
+              <ul>
+                  <li><strong>Multiplication:</strong> Easy (1-10 × 1-10), Med (1-10 × 11-30 or vice-versa), Hard (11-30 × 11-30), Expert (31-50 × 31-50)</li>
+                  <li><strong>Squares:</strong> Easy (1-20), Med (21-30), Hard (31-40), Expert (41-50)</li>
+                  <li><strong>Cubes:</strong> Easy (1-10), Med (11-20), Hard (21-30), Expert (31-40)</li>
+                  <li><strong>Square Root (Result):</strong> Easy (1-20), Med (21-30), Hard (31-40), Expert (41-50)</li>
+                  <li><strong>Cube Root (Result):</strong> Easy (1-10), Med (11-20), Hard (21-30), Expert (31-40)</li>
+                   <li><strong>Fractions (Decimal Value):</strong> Numerator/Denominator always 1-10. Difficulty level currently only affects Adaptive/Challenge mode progression.</li>
+              </ul>
+               <h4>Keyboard Shortcuts</h4>
+              <ul>
+                  <li><strong>Enter:</strong> Submit answer (when input focused).</li>
+                  <li><strong>S:</strong> Skip current question (during session).</li>
+                  <li><strong>T:</strong> Toggle Light/Dark Theme.</li>
+                  <li><strong>?</strong> or <strong>I:</strong> Show/Hide this information panel (when not in session).</li>
+                  <li><strong>Esc:</strong> Close this panel or Graph Tooltip.</li>
+              </ul>
+              <h4>Other Features</h4>
+              <ul>
+                 <li><strong>Auto-Submit:</strong> Correct answers are submitted automatically as you type them.</li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+  <!-- ============ GRAPH TOOLTIP ELEMENT (Remains outside specific areas) ============ -->
+  <div id="graphTooltip"></div>
+
+  <!-- Back to Top Button (Global) -->
+  <button id="back-to-top-btn" title="Back to Top">↑</button> <!-- Simple up arrow -->
+

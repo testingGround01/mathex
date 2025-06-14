@@ -2580,7 +2580,7 @@ function renderDashboardInsights(profile) {
 /* ---------------------------------------
    INITIALIZATION
 ---------------------------------------- */
-document.addEventListener('DOMContentLoaded', () => {
+function initMathex() {
     console.log("DOM Fully Loaded.");
     applySavedTheme();
     showArea('dashboard-area'); // Start on dashboard
@@ -2606,4 +2606,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     console.log("Mathex App Initialized.");
-});
+}
+
+document.addEventListener("DOMContentLoaded", initMathex);
