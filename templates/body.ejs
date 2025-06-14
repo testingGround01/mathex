@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neumorphic Card - Math Practice & Study</title>
-  <!-- Added Google Font for Study Area -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- Link to the external CSS file -->
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- ============ TOP TAB (Fixed) ============ -->
+  <!-- ============ TOP TAB (Fixed) ============ -->
   <div class="page-tab">
     <!-- HAMBURGER BUTTON -->
     <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="main-nav">
@@ -33,7 +19,8 @@
           <li><a href="#dashboard-area" data-area="dashboard-area" onclick="showArea('dashboard-area');">Dashboard</a></li>
           <li><a href="#practice-area" data-area="practice-area" onclick="showArea('practice-area');">Practice</a></li>
           <li><a href="#study-area" data-area="study-area" onclick="showArea('study-area');">Study</a></li>
-          <li><a href="#review-area" data-area="review-area" onclick="showArea('review-area');">Review</a></li>
+          <li><a href="#review-area" data-area="review-area" onclick="showArea('review-area');">Review</a></li> <!-- NEW -->
+          <li><a href="#" onclick="closeNavMenu(); showInfo();">Information</a></li>
       </ul>
   </nav>
 
@@ -695,6 +682,3 @@
 
   <!-- Link to the external JavaScript file -->
   <script src="script.js" defer></script>
-
-</body>
-</html>
