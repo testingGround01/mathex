@@ -1,0 +1,12 @@
+{
+  "name": "mathex",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node build.js && npx http-server -c-1"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "http-server": "^14.1.1"
+  }
+}
