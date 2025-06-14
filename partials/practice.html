@@ -1,0 +1,335 @@
+  <!-- ============ PRACTICE AREA (Unchanged) ============ -->
+  <div id="practice-area">
+      <!-- All existing practice-related cards go inside here -->
+      <div id="mainCard" class="neumorphic-card">
+        <h2>Test Your Skills</h2>
+        <!-- Mode Selection Buttons -->
+        <div class="section-buttons" role="tablist" aria-label="Practice Modes">
+          <button id="btn-section1" class="active" onclick="showSection('section1')" role="tab" aria-selected="true" aria-controls="section1">Fixed Qs</button>
+          <button id="btn-section2" onclick="showSection('section2')" role="tab" aria-selected="false" aria-controls="section2">Fixed Time</button>
+          <button id="btn-section3" onclick="showSection('section3')" role="tab" aria-selected="false" aria-controls="section3">Adaptive</button>
+          <button id="btn-section4" onclick="showSection('section4')" role="tab" aria-selected="false" aria-controls="section4">Challenge</button>
+          <button id="btn-section5" onclick="showSection('section5')" role="tab" aria-selected="false" aria-controls="section5">Targeted</button>
+        </div>
+
+        <!-- SECTION 1: Fixed Questions -->
+        <div id="section1" class="section active" role="tabpanel" aria-labelledby="btn-section1" aria-hidden="false">
+          <label for="s1-numQuestions" class="visually-hidden">Number of Questions</label>
+          <input id="s1-numQuestions" class="input-bar" type="number" placeholder="Number of Questions (e.g., 10)" min="1" value="10">
+          <div class="checkbox-group">
+            <div class="checkbox-title" id="s1-types-title">Select Question Type(s)</div>
+            <div class="checkbox-options" data-group="s1-types" role="group" aria-labelledby="s1-types-title">
+              <label><input type="checkbox" value="multiplication" checked><span>Multiplication</span></label>
+              <label><input type="checkbox" value="squares"><span>Squares</span></label>
+              <label><input type="checkbox" value="cubes"><span>Cubes</span></label>
+              <label><input type="checkbox" value="sqrt"><span>Square Root</span></label>
+              <label><input type="checkbox" value="cbrt"><span>Cube Root</span></label>
+              <label><input type="checkbox" value="fractions"><span>Fractions (Decimal Value)</span></label>
+            </div>
+          </div>
+          <div class="checkbox-group">
+            <div class="checkbox-title" id="s1-difficulty-title">Select Difficulty Level(s) <span style="font-weight: normal; font-size: 0.9em;">(for Typed Qs)</span></div>
+            <div class="checkbox-options" data-group="s1-difficulty" role="group" aria-labelledby="s1-difficulty-title">
+              <label><input type="checkbox" value="easy" checked><span>Easy</span></label>
+              <label><input type="checkbox" value="medium"><span>Medium</span></label>
+              <label><input type="checkbox" value="hard"><span>Hard</span></label>
+              <label><input type="checkbox" value="expert"><span>Expert</span></label>
+            </div>
+          </div>
+          <button class="start-btn" onclick="startSession()">Start</button>
+        </div>
+
+        <!-- SECTION 2: Fixed Time -->
+        <div id="section2" class="section" role="tabpanel" aria-labelledby="btn-section2" aria-hidden="true">
+           <label for="s2-timeDuration" class="visually-hidden">Time Duration in Seconds</label>
+           <input id="s2-timeDuration" class="input-bar" type="number" placeholder="Time Duration (seconds, e.g., 60)" min="10" value="60">
+           <div class="checkbox-group">
+             <div class="checkbox-title" id="s2-types-title">Select Question Type(s)</div>
+             <div class="checkbox-options" data-group="s2-types" role="group" aria-labelledby="s2-types-title">
+                <label><input type="checkbox" value="multiplication" checked><span>Multiplication</span></label>
+                <label><input type="checkbox" value="squares"><span>Squares</span></label>
+                <label><input type="checkbox" value="cubes"><span>Cubes</span></label>
+                <label><input type="checkbox" value="sqrt"><span>Square Root</span></label>
+                <label><input type="checkbox" value="cbrt"><span>Cube Root</span></label>
+                <label><input type="checkbox" value="fractions"><span>Fractions (Decimal Value)</span></label>
+             </div>
+           </div>
+           <div class="checkbox-group">
+             <div class="checkbox-title" id="s2-difficulty-title">Select Difficulty Level(s) <span style="font-weight: normal; font-size: 0.9em;">(for Typed Qs)</span></div>
+             <div class="checkbox-options" data-group="s2-difficulty" role="group" aria-labelledby="s2-difficulty-title">
+               <label><input type="checkbox" value="easy" checked><span>Easy</span></label>
+               <label><input type="checkbox" value="medium"><span>Medium</span></label>
+               <label><input type="checkbox" value="hard"><span>Hard</span></label>
+               <label><input type="checkbox" value="expert"><span>Expert</span></label>
+             </div>
+           </div>
+           <button class="start-btn" onclick="startSession()">Start</button>
+        </div>
+
+        <!-- SECTION 3: Adaptive -->
+        <div id="section3" class="section" role="tabpanel" aria-labelledby="btn-section3" aria-hidden="true">
+          <div class="subsection-toggle" role="tablist" aria-label="Adaptive Mode Type">
+            <button id="sub-fq" class="active" onclick="toggleSub('fq')" role="tab" aria-selected="true" aria-controls="s3-adaptiveInput">Fixed Questions</button>
+            <button id="sub-ft" onclick="toggleSub('ft')" role="tab" aria-selected="false" aria-controls="s3-adaptiveInput">Fixed Time</button>
+          </div>
+          <label for="s3-adaptiveInput" class="visually-hidden" id="s3-input-label">Number of Questions</label>
+          <input id="s3-adaptiveInput" class="input-bar" type="number" placeholder="Number of Questions (e.g., 15)" min="1" data-mode="questions" aria-labelledby="s3-input-label" value="15">
+           <div class="checkbox-group">
+            <div class="checkbox-title" id="s3-types-title">Select Question Type(s)</div>
+            <div class="checkbox-options" data-group="s3-types" role="group" aria-labelledby="s3-types-title">
+                <label><input type="checkbox" value="multiplication" checked><span>Multiplication</span></label>
+                <label><input type="checkbox" value="squares"><span>Squares</span></label>
+                <label><input type="checkbox" value="cubes"><span>Cubes</span></label>
+                <label><input type="checkbox" value="sqrt"><span>Square Root</span></label>
+                <label><input type="checkbox" value="cbrt"><span>Cube Root</span></label>
+                <label><input type="checkbox" value="fractions"><span>Fractions (Decimal Value)</span></label>
+            </div>
+          </div>
+          <button class="start-btn" onclick="startSession()">Start</button>
+        </div>
+
+        <!-- SECTION 4: Challenge -->
+        <div id="section4" class="section" role="tabpanel" aria-labelledby="btn-section4" aria-hidden="true">
+          <label for="s4-timeDuration" class="visually-hidden">Initial Time Duration in Seconds</label>
+          <input id="s4-timeDuration" class="input-bar" type="number" placeholder="Time Duration (seconds, e.g., 120)" min="30" value="120">
+          <div class="checkbox-group">
+            <div class="checkbox-title" id="s4-types-title">Select Question Type(s)</div>
+            <div class="checkbox-options" data-group="s4-types" role="group" aria-labelledby="s4-types-title">
+                <label><input type="checkbox" value="multiplication" checked><span>Multiplication</span></label>
+                <label><input type="checkbox" value="squares"><span>Squares</span></label>
+                <label><input type="checkbox" value="cubes"><span>Cubes</span></label>
+                <label><input type="checkbox" value="sqrt"><span>Square Root</span></label>
+                <label><input type="checkbox" value="cbrt"><span>Cube Root</span></label>
+                <label><input type="checkbox" value="fractions"><span>Fractions (Decimal Value)</span></label>
+            </div>
+          </div>
+          <div class="checkbox-group">
+            <div class="checkbox-title" id="s4-difficulty-title">Select Starting Difficulty Level</div>
+            <div class="checkbox-options" data-group="s4-difficulty" role="radiogroup" aria-labelledby="s4-difficulty-title">
+              <label><input type="radio" name="s4-difficulty-radio" value="easy" checked><span>Easy</span></label>
+              <label><input type="radio" name="s4-difficulty-radio" value="medium"><span>Medium</span></label>
+              <label><input type="radio" name="s4-difficulty-radio" value="hard"><span>Hard</span></label>
+              <label><input type="radio" name="s4-difficulty-radio" value="expert"><span>Expert</span></label>
+            </div>
+          </div>
+          <button class="start-btn" onclick="startSession()">Start Challenge</button>
+        </div>
+
+        <!-- SECTION 5: Targeted Practice -->
+        <div id="section5" class="section" role="tabpanel" aria-labelledby="btn-section5" aria-hidden="true">
+            <div class="targeted-type-selector checkbox-group">
+                <div class="checkbox-title" id="s5-target-type-title">Select Target Type</div>
+                <div class="checkbox-options" role="radiogroup" aria-labelledby="s5-target-type-title">
+                    <label><input type="radio" name="s5-target-type" value="multiplicationTable" checked onchange="updateTargetedInputs()"><span>Mult. Table</span></label>
+                    <label><input type="radio" name="s5-target-type" value="squareRange" onchange="updateTargetedInputs()"><span>Square Range</span></label>
+                    <label><input type="radio" name="s5-target-type" value="cubeRange" onchange="updateTargetedInputs()"><span>Cube Range</span></label>
+                </div>
+            </div>
+            <div class="targeted-inputs">
+                <div id="s5-input-multiplicationTable">
+                     <label for="s5-targetValue1" class="visually-hidden">Multiplication Tables</label>
+                     <input id="s5-targetValue1" class="input-bar" type="text" placeholder="Tables or range (e.g., 3,5,7 or 2-5)" value="7">
+                </div>
+                <div id="s5-input-squareRange" style="display: none;">
+                    <div class="input-pair">
+                        <label for="s5-targetValueMinSq" class="visually-hidden">Minimum Square Base</label>
+                        <input id="s5-targetValueMinSq" class="input-bar" type="number" placeholder="Min" min="1" value="21">
+                        <span>to</span>
+                        <label for="s5-targetValueMaxSq" class="visually-hidden">Maximum Square Base</label>
+                        <input id="s5-targetValueMaxSq" class="input-bar" type="number" placeholder="Max" min="1" value="30">
+                    </div>
+                </div>
+                 <div id="s5-input-cubeRange" style="display: none;">
+                    <div class="input-pair">
+                        <label for="s5-targetValueMinCb" class="visually-hidden">Minimum Cube Base</label>
+                        <input id="s5-targetValueMinCb" class="input-bar" type="number" placeholder="Min" min="1" value="11">
+                        <span>to</span>
+                        <label for="s5-targetValueMaxCb" class="visually-hidden">Maximum Cube Base</label>
+                        <input id="s5-targetValueMaxCb" class="input-bar" type="number" placeholder="Max" min="1" value="20">
+                    </div>
+                </div>
+            </div>
+            <div class="targeted-limit-type checkbox-group">
+                <div class="checkbox-title" id="s5-limit-type-title">Select Limit</div>
+                <div class="checkbox-options" role="radiogroup" aria-labelledby="s5-limit-type-title">
+                    <label><input type="radio" name="s5-limit-type" value="questions" checked onchange="updateTargetedLimitInput()"><span>Questions</span></label>
+                    <label><input type="radio" name="s5-limit-type" value="time" onchange="updateTargetedLimitInput()"><span>Time</span></label>
+                </div>
+                <label for="s5-limitValue" class="visually-hidden" id="s5-limit-label">Number of Questions</label>
+                <input id="s5-limitValue" class="input-bar" type="number" placeholder="Number of Questions (e.g., 10)" min="1" value="10" aria-labelledby="s5-limit-label">
+            </div>
+          <button class="start-btn" onclick="startSession()">Start Practice</button>
+        </div>
+      </div>
+
+      <!-- SESSION CARD (Inside Practice Area) -->
+      <div id="sessionCard" class="secondary-card" aria-hidden="true">
+        <!-- Progress Bar and Status -->
+        <div class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-labelledby="statusIndicator">
+          <div id="progressBar" class="progress-bar" style="width: 0%;"></div>
+        </div>
+        <div id="statusIndicator" class="status-indicator" aria-live="polite">Question 0 / 0</div>
+        <!-- Question Display -->
+        <div id="sessionQuestion" class="session-question" aria-live="polite">Question will appear here...</div>
+        <!-- Answer Input -->
+        <label for="sessionAnswer" class="visually-hidden">Your Answer</label>
+        <input id="sessionAnswer" class="input-bar" type="number" step="0.001" inputmode="decimal" placeholder="Enter your answer (e.g., 1.500)">
+        <!-- Action Buttons -->
+        <div class="session-actions">
+          <button onclick="submitAnswer()" aria-label="Submit Answer (Enter)">Submit</button>
+          <button onclick="skipQuestion()" aria-label="Skip Question (S)">Skip</button>
+        </div>
+      </div>
+
+      <!-- RESULT CARD (Inside Practice Area) -->
+      <div id="resultCard" class="secondary-card" aria-hidden="true">
+        <h2>Session Results</h2>
+        <div class="result-columns">
+          <!-- Column 1: Summary & Pie Chart -->
+          <div class="result-column result-column-1">
+            <div class="column-card">
+              <div class="subheading">Summary</div>
+              <div class="subcards">
+                <div class="result-subcard">
+                  <div class="hero-number" id="accuracyNumber">0%</div>
+                  <div class="hero-label">Accuracy</div>
+                </div>
+                <div class="result-subcard">
+                  <div class="hero-number" id="correctNumber">0</div>
+                  <div class="hero-label">Correct</div>
+                </div>
+                <div class="result-subcard">
+                  <div class="hero-number" id="incorrectNumber">0</div>
+                  <div class="hero-label">Incorrect</div>
+                </div>
+                 <div class="result-subcard">
+                  <div class="hero-number" id="skippedNumber">0</div>
+                  <div class="hero-label">Skipped</div>
+                </div>
+                <div class="result-subcard" id="streakCard">
+                  <div class="hero-number" id="streakNumber">0</div>
+                  <div class="hero-label">Longest Streak</div>
+                </div>
+              </div>
+               <div id="challengeScoreContainer">
+                   <div class="subheading">Challenge Score</div>
+                   <div class="subcards">
+                       <div class="result-subcard" id="challengeScoreCard">
+                           <div class="hero-number" id="challengeScoreNumber">0</div>
+                           <div class="hero-label">Total Score</div>
+                       </div>
+                   </div>
+               </div>
+              <div class="subheading pie-chart-heading" id="pie-chart-heading">Answer Breakdown</div>
+              <div id="summaryPieChartContainer" class="summary-pie-chart-container" role="figure" aria-labelledby="pie-chart-heading">
+                  <div class="pie-chart-placeholder" style="color: var(--text-secondary); font-style: italic; padding: 20px 0;"></div>
+              </div>
+              <div id="summaryPieChartLegend" class="pie-chart-legend"></div>
+            </div>
+          </div>
+          <!-- Column 2: Time Graph & Time Analysis -->
+          <div class="result-column result-column-2">
+            <div class="graph-subcard">
+              <div class="subheading" id="time-graph-heading">Time per Question (Hover/Focus for details)</div>
+              <div id="timeGraph" class="time-graph" role="figure" aria-labelledby="time-graph-heading">
+                <div style="color: var(--text-secondary); font-style: italic; padding-left: 10px;">No time data yet.</div>
+              </div>
+               <div class="subheading">Time Analysis</div>
+               <div class="subcards">
+                 <div class="result-subcard">
+                   <div class="hero-number" id="avgTimeNumber">0s</div>
+                   <div class="hero-label">Average Time</div>
+                 </div>
+                 <div class="result-subcard">
+                   <div class="hero-number" id="fastestNumber">0s</div>
+                   <div class="hero-label">Fastest</div>
+                 </div>
+                 <div class="result-subcard">
+                   <div class="hero-number" id="slowestNumber">0s</div>
+                   <div class="hero-label">Slowest</div>
+                 </div>
+                 <div class="result-subcard" id="totalTimeCard">
+                  <div class="hero-number" id="totalTimeNumber">0s</div>
+                  <div class="hero-label">Total Time</div>
+                 </div>
+               </div>
+            </div>
+          </div>
+          <!-- Column 3: Detailed Results -->
+          <div class="result-column result-column-3">
+            <div class="detail-table-subcard" id="detailTableSubcard">
+              <div class="subheading" id="desktop-detail-heading">Detailed Results</div>
+               <div class="table-scroll-wrapper">
+                  <table class="detailed-results" id="detailedResultsTable" aria-labelledby="desktop-detail-heading">
+                    <thead>
+                      <tr>
+                        <th scope="col">Question</th>
+                        <th scope="col">Correct Answer</th>
+                        <th scope="col">Your Answer</th>
+                        <th scope="col">Time Taken</th>
+                      </tr>
+                    </thead>
+                    <tbody id="detailTableBody">
+                        <tr><td colspan="4" style="text-align: center; color: var(--text-secondary); font-style: italic;">No details yet.</td></tr>
+                    </tbody>
+                  </table>
+               </div>
+            </div>
+            <div id="mobileDetailContainer" class="result-card-container">
+              <div class="subheading">Detailed Results</div>
+              <div style="text-align: center; color: var(--text-secondary); font-style: italic;">No details yet.</div>
+            </div>
+          </div>
+        </div>
+        <div class="session-actions" style="margin-top: 35px;">
+            <button id="playAgainBtn" onclick="resetToMainScreen()">Play Again</button>
+        </div>
+      </div>
+
+      <!-- INFO BUTTON & DESKTOP TOOLTIP AREA (Inside Practice Area) -->
+      <div id="info-container">
+          <button id="info-button" aria-label="Show Information (? or I)" aria-haspopup="true" aria-expanded="false">?</button>
+          <div id="info-tooltip" role="tooltip">
+              <h4>Information</h4>
+              <h4>Modes</h4>
+              <ul>
+                  <li><strong>Fixed Questions:</strong> Answer a set number of questions. Select types and difficulties freely.</li>
+                  <li><strong>Fixed Time:</strong> Answer as many questions as possible within the time limit. Select types and difficulties freely.</li>
+                  <li><strong>Adaptive (Enhanced):</strong> Difficulty now adapts based on your long-term performance, focusing on your weakest areas using mastery scores and spaced repetition. In-session difficulty still adjusts based on correct/incorrect streaks.</li>
+                  <li><strong>Challenge:</strong> Time-based mode. Start at a chosen difficulty. Correct answers add time bonus (Easy:+0.5s, Exp:+2s) & difficulty ↑ after 3 correct. Incorrect answers reset difficulty streak.</li>
+                  <li><strong>Targeted:</strong> Practice a specific multiplication table, or a specific range of squares or cubes. Choose number of questions or time limit.</li>
+              </ul>
+              <h4>Question Types</h4>
+              <ul>
+                  <li><strong>Multiplication:</strong> e.g., 12 × 5</li>
+                  <li><strong>Squares:</strong> e.g., 15²</li>
+                  <li><strong>Cubes:</strong> e.g., 7³</li>
+                  <li><strong>Square Root:</strong> e.g., √144 (only perfect squares)</li>
+                  <li><strong>Cube Root:</strong> e.g., ³√125 (only perfect cubes)</li>
+                  <li><strong>Fractions (Decimal Value):</strong> e.g., 3/8? (answer as decimal: 0.375)</li>
+              </ul>
+               <h4>Difficulty Levels (Approx. Number Ranges / Effect)</h4>
+               <ul>
+                   <li><strong>Multiplication:</strong> Easy (1-10 × 1-10), Med (1-10 × 11-30 or vice-versa), Hard (11-30 × 11-30), Expert (31-50 × 31-50)</li>
+                   <li><strong>Squares:</strong> Easy (1-20), Med (21-30), Hard (31-40), Expert (41-50)</li>
+                   <li><strong>Cubes:</strong> Easy (1-10), Med (11-20), Hard (21-30), Expert (31-40)</li>
+                   <li><strong>Square Root (Result):</strong> Easy (1-20), Med (21-30), Hard (31-40), Expert (41-50)</li>
+                   <li><strong>Cube Root (Result):</strong> Easy (1-10), Med (11-20), Hard (21-30), Expert (31-40)</li>
+                   <li><strong>Fractions (Decimal Value):</strong> Numerator/Denominator always 1-10. Difficulty level currently only affects Adaptive/Challenge mode progression.</li>
+               </ul>
+                <h4>Keyboard Shortcuts</h4>
+               <ul>
+                   <li><strong>Enter:</strong> Submit answer (when input focused).</li>
+                   <li><strong>S:</strong> Skip current question (during session).</li>
+                   <li><strong>T:</strong> Toggle Light/Dark Theme.</li>
+                   <li><strong>?</strong> or <strong>I:</strong> Show/Hide this information panel (when not in session).</li>
+                   <li><strong>Esc:</strong> Close this panel or Graph Tooltip.</li>
+               </ul>
+               <h4>Other Features</h4>
+               <ul>
+                   <li><strong>Auto-Submit:</strong> Correct answers are submitted automatically as you type them.</li>
+               </ul>
+          </div>
+      </div>
+
+  </div><!-- END Practice Area -->

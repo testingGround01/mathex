@@ -1,0 +1,94 @@
+  <!-- ============ DASHBOARD AREA (ENHANCED) ============ -->
+  <div id="dashboard-area">
+      <div id="dashboardCard" class="dashboard-card">
+          <h2>Your Dashboard</h2>
+          
+          <!-- Overall Performance (Existing) -->
+          <div id="overall-stats">
+              <div class="subheading">Overall Performance</div>
+              <div class="subcards">
+                  <!-- Subcards will be populated by JS -->
+                  <p>Start practicing to see your stats here!</p>
+              </div>
+          </div>
+          
+          <!-- NEW: Trend Analysis Section -->
+          <div id="dashboard-trends">
+              <div class="subheading">Your Progress Over Time</div>
+              <div class="dashboard-grid">
+                  <!-- Performance Trends Chart -->
+                  <div class="graph-subcard" id="performanceTrendContainer">
+                      <h4 class="subheading" style="text-align:center; margin-top:0; border:none;">Performance Trends</h4>
+                      <div id="performanceTrendChart" class="time-graph" role="figure" aria-labelledby="performanceTrendHeading">
+                          <div style="color: var(--text-secondary); font-style: italic; padding: 20px;">Performance history will be charted here.</div>
+                      </div>
+                  </div>
+                  <!-- Mastery Evolution Chart -->
+                  <div class="graph-subcard" id="masteryTrendContainer">
+                       <h4 class="subheading" style="text-align:center; margin-top:0; border:none;">Mastery Evolution</h4>
+                       <div id="masteryTrendChart" class="time-graph" role="figure" aria-labelledby="masteryTrendHeading">
+                           <div style="color: var(--text-secondary); font-style: italic; padding: 20px;">Your mastery growth will appear here.</div>
+                       </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Performance by Type/Difficulty (Existing) -->
+          <div class="dashboard-grid">
+              <div id="type-performance">
+                  <div class="subheading">Performance by Question Type</div>
+                  <table class="dashboard-table" id="type-performance-table">
+                      <thead>
+                          <tr>
+                              <th>Type</th>
+                              <th>Accuracy</th>
+                              <th>Mastery</th>
+                              <th>Avg. Time</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- Rows will be populated by JS -->
+                      </tbody>
+                  </table>
+              </div>
+              <div id="difficulty-performance">
+                  <div class="subheading">Performance by Difficulty</div>
+                   <table class="dashboard-table" id="difficulty-performance-table">
+                      <thead>
+                          <tr>
+                              <th>Difficulty</th>
+                              <th>Accuracy</th>
+                              <th>Mastery</th>
+                              <th>Avg. Time</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- Rows will be populated by JS -->
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          
+          <!-- Upcoming Reviews (Existing) -->
+          <div id="review-container">
+              <div class="subheading">Upcoming Reviews</div>
+              <p id="review-message" style="text-align: left; color: var(--text-secondary);">Topics you should practice next based on spaced repetition.</p>
+              <div id="review-items" class="subcards" style="justify-content: flex-start;">
+                <!-- Review items will be populated by JS -->
+              </div>
+          </div>
+
+          <!-- NEW: Persona-Based Insights & Achievements -->
+          <div id="dashboard-insights">
+              <div class="subheading">Insights & Achievements</div>
+              <div id="insights-container" class="subcards" style="justify-content: flex-start;">
+                   <!-- Insights will be populated by JS -->
+                   <p style="text-align: left; color: var(--text-secondary); width: 100%;">Personalized tips will appear here as you practice.</p>
+              </div>
+              <div id="achievements-container" class="subcards" style="justify-content: flex-start;">
+                   <!-- Achievement badges will be populated by JS -->
+              </div>
+          </div>
+
+      </div>
+  </div><!-- END Dashboard Area -->
