@@ -1,0 +1,50 @@
+  <!-- ============ STUDY AREA (Unchanged) ============ -->
+  <div id="study-area">
+      <!-- CONTENT FROM SECOND HTML FILE PASTED HERE -->
+       <div class="study-container"> <!-- Renamed class -->
+            <h1>Neumorphic Math Tables</h1>
+
+            <!-- Utility Controls -->
+            <div class="controls">
+                 <div class="control-item">
+                     <button id="toggle-answers-btn" class="neumorphic-button" data-state="shown">Hide Answers</button>
+                 </div>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="tab-container" role="tablist">
+                <button class="tab-button active" data-tab="multiplication" role="tab" aria-selected="true" id="tab-btn-multiplication">Multiplication (1-50)</button>
+                <button class="tab-button" data-tab="squares" role="tab" aria-selected="false" id="tab-btn-squares">Squares (1-50)</button>
+                <button class="tab-button" data-tab="cubes" role="tab" aria-selected="false" id="tab-btn-cubes">Cubes (1-30)</button>
+            </div>
+
+            <!-- Tab Content Panels -->
+            <div id="multiplication" class="tab-content active" role="tabpanel" aria-labelledby="tab-btn-multiplication">
+                <h2>Multiplication Tables (1 to 50)</h2>
+                 <div class="controls">
+                     <div class="control-item">
+                        <label for="jump-to-input">Jump to Table:</label>
+                        <input type="number" id="jump-to-input" class="neumorphic-input" placeholder="e.g., 27" min="1" max="50"> <!-- Added min/max -->
+                    </div>
+                 </div>
+                <div id="multiplication-tables-grid">
+                     <p>Loading Multiplication Tables...</p>
+                </div>
+            </div>
+
+            <div id="squares" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-squares">
+                <h2>Squares (1 to 50)</h2>
+                <div id="squares-tables-grid">
+                     <p>Loading Squares...</p>
+                </div>
+            </div>
+
+            <div id="cubes" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-cubes">
+                <h2>Cubes (1 to 30)</h2>
+                <div id="cubes-tables-grid">
+                    <p>Loading Cubes...</p>
+                </div>
+            </div>
+        </div>
+      <!-- END OF PASTED CONTENT -->
+  </div><!-- END Study Area -->

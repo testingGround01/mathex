@@ -1,0 +1,117 @@
+  <!-- ============ REVIEW AREA (NEW) ============ -->
+  <div id="review-area">
+      <!-- Card for listing past sessions -->
+      <div id="reviewListCard" class="neumorphic-card" style="max-width: 800px;">
+          <h2>Session History</h2>
+          <div id="session-list-container">
+              <!-- Session history list will be populated by JS -->
+              <p style="color: var(--text-secondary); font-style: italic;">Your past practice sessions will appear here.</p>
+          </div>
+      </div>
+      
+      <!-- Card for displaying the details of a selected past session. -->
+      <!-- This is a clone of resultCard with unique IDs. -->
+      <div id="reviewDetailCard" class="secondary-card" aria-hidden="true" style="display: none;">
+        <h2 id="reviewDetailTitle">Session Review</h2>
+        <div class="result-columns">
+          <!-- Column 1: Summary & Pie Chart -->
+          <div class="result-column result-column-1">
+            <div class="column-card">
+              <div class="subheading">Summary</div>
+              <div class="subcards">
+                <div class="result-subcard">
+                  <div class="hero-number" id="reviewAccuracyNumber">0%</div>
+                  <div class="hero-label">Accuracy</div>
+                </div>
+                <div class="result-subcard">
+                  <div class="hero-number" id="reviewCorrectNumber">0</div>
+                  <div class="hero-label">Correct</div>
+                </div>
+                <div class="result-subcard">
+                  <div class="hero-number" id="reviewIncorrectNumber">0</div>
+                  <div class="hero-label">Incorrect</div>
+                </div>
+                 <div class="result-subcard">
+                  <div class="hero-number" id="reviewSkippedNumber">0</div>
+                  <div class="hero-label">Skipped</div>
+                </div>
+                <div class="result-subcard" id="reviewStreakCard">
+                  <div class="hero-number" id="reviewStreakNumber">0</div>
+                  <div class="hero-label">Longest Streak</div>
+                </div>
+              </div>
+               <div id="reviewChallengeScoreContainer" style="display:none;">
+                   <div class="subheading">Challenge Score</div>
+                   <div class="subcards">
+                       <div class="result-subcard" id="reviewChallengeScoreCard">
+                           <div class="hero-number" id="reviewChallengeScoreNumber">0</div>
+                           <div class="hero-label">Total Score</div>
+                       </div>
+                   </div>
+               </div>
+              <div class="subheading pie-chart-heading" id="review-pie-chart-heading">Answer Breakdown</div>
+              <div id="reviewPieChartContainer" class="summary-pie-chart-container" role="figure" aria-labelledby="review-pie-chart-heading">
+                  <div class="pie-chart-placeholder" style="color: var(--text-secondary); font-style: italic; padding: 20px 0;"></div>
+              </div>
+              <div id="reviewPieChartLegend" class="pie-chart-legend"></div>
+            </div>
+          </div>
+          <!-- Column 2: Time Graph & Time Analysis -->
+          <div class="result-column result-column-2">
+            <div class="graph-subcard">
+              <div class="subheading" id="review-time-graph-heading">Time per Question</div>
+              <div id="reviewTimeGraph" class="time-graph" role="figure" aria-labelledby="review-time-graph-heading">
+                <div style="color: var(--text-secondary); font-style: italic; padding-left: 10px;">No time data yet.</div>
+              </div>
+               <div class="subheading">Time Analysis</div>
+               <div class="subcards">
+                 <div class="result-subcard">
+                   <div class="hero-number" id="reviewAvgTimeNumber">0s</div>
+                   <div class="hero-label">Average Time</div>
+                 </div>
+                 <div class="result-subcard">
+                   <div class="hero-number" id="reviewFastestNumber">0s</div>
+                   <div class="hero-label">Fastest</div>
+                 </div>
+                 <div class="result-subcard">
+                   <div class="hero-number" id="reviewSlowestNumber">0s</div>
+                   <div class="hero-label">Slowest</div>
+                 </div>
+                 <div class="result-subcard" id="reviewTotalTimeCard">
+                  <div class="hero-number" id="reviewTotalTimeNumber">0s</div>
+                  <div class="hero-label">Total Time</div>
+                 </div>
+               </div>
+            </div>
+          </div>
+          <!-- Column 3: Detailed Results -->
+          <div class="result-column result-column-3">
+            <div class="detail-table-subcard" id="reviewDetailTableSubcard">
+              <div class="subheading" id="review-desktop-detail-heading">Detailed Results</div>
+               <div class="table-scroll-wrapper">
+                  <table class="detailed-results" id="reviewDetailedResultsTable" aria-labelledby="review-desktop-detail-heading">
+                    <thead>
+                      <tr>
+                        <th scope="col">Question</th>
+                        <th scope="col">Correct Answer</th>
+                        <th scope="col">Your Answer</th>
+                        <th scope="col">Time Taken</th>
+                      </tr>
+                    </thead>
+                    <tbody id="reviewDetailTableBody">
+                        <tr><td colspan="4" style="text-align: center; color: var(--text-secondary); font-style: italic;">No details yet.</td></tr>
+                    </tbody>
+                  </table>
+               </div>
+            </div>
+            <div id="reviewMobileDetailContainer" class="result-card-container">
+              <div class="subheading">Detailed Results</div>
+              <div style="text-align: center; color: var(--text-secondary); font-style: italic;">No details yet.</div>
+            </div>
+          </div>
+        </div>
+        <div class="session-actions" style="margin-top: 35px;">
+            <button id="backToListBtn" onclick="showReviewList()">Back to Session History</button>
+        </div>
+      </div>
+  </div><!-- END Review Area -->

@@ -1,0 +1,25 @@
+  <!-- ============ TOP TAB (Fixed) ============ -->
+  <div class="page-tab">
+    <!-- HAMBURGER BUTTON -->
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <!-- END HAMBURGER BUTTON -->
+
+    <span class="page-title" id="pageTitle">Mathex - Dashboard</span> <!-- Updated ID -->
+    <button class="toggle-btn" id="themeToggle" aria-label="Toggle dark mode (T)">🌙</button>
+  </div>
+
+  <!-- ============ NAVIGATION MENU ============ -->
+  <nav id="main-nav" aria-labelledby="hamburgerBtn">
+      <ul class="nav-list">
+          <!-- UPDATED Nav Links with data attributes -->
+          <li><a href="#dashboard-area" data-area="dashboard-area" onclick="showArea('dashboard-area');">Dashboard</a></li>
+          <li><a href="#practice-area" data-area="practice-area" onclick="showArea('practice-area');">Practice</a></li>
+          <li><a href="#study-area" data-area="study-area" onclick="showArea('study-area');">Study</a></li>
+          <li><a href="#review-area" data-area="review-area" onclick="showArea('review-area');">Review</a></li> <!-- NEW -->
+          <li><a href="#" onclick="closeNavMenu(); showInfo();">Information</a></li>
+      </ul>
+  </nav>
